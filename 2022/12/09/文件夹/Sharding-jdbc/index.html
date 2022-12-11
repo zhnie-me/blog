@@ -4,20 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>note</title>
+  <title>Sharding-jdbc | note</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Sharding-jdbc概念：垂直分库：多个库，分别查不同表； ds0.t_order，ds1.t_user 水平分表：多个库，分别存结构类似的表；ds0:t_order_0 ，ds1:t_order_1 水平分库：多个库，根据算法得出不同库，不同表；（比水平分表多了一个条件）  ds$-&gt;{status % 2} ，t_order_$-&gt;{oid % 2}，ds$-&gt;{0..">
+  <meta name="description" content="Sharding-jdbc概念：垂直分库：多个库，分别查不同表； ds0.t_order，ds1.t_user 水平分表：多个库，分别存结构类似的表；ds0:t_order_0 ，ds1:t_order_1 水平分库：多个库，根据算法得出不同库，不同表；（比水平分表多了一个条件）  ds$-&gt;{status % 2} ，t_order_​$-&gt;{oid % 2}，ds$-&gt;{0.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="note">
-<meta property="og:url" content="http://example.com/2022/12/11/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/index.html">
+<meta property="og:title" content="Sharding-jdbc">
+<meta property="og:url" content="http://example.com/2022/12/09/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/index.html">
 <meta property="og:site_name" content="note">
-<meta property="og:description" content="Sharding-jdbc概念：垂直分库：多个库，分别查不同表； ds0.t_order，ds1.t_user 水平分表：多个库，分别存结构类似的表；ds0:t_order_0 ，ds1:t_order_1 水平分库：多个库，根据算法得出不同库，不同表；（比水平分表多了一个条件）  ds$-&gt;{status % 2} ，t_order_$-&gt;{oid % 2}，ds$-&gt;{0..">
+<meta property="og:description" content="Sharding-jdbc概念：垂直分库：多个库，分别查不同表； ds0.t_order，ds1.t_user 水平分表：多个库，分别存结构类似的表；ds0:t_order_0 ，ds1:t_order_1 水平分库：多个库，根据算法得出不同库，不同表；（比水平分表多了一个条件）  ds$-&gt;{status % 2} ，t_order_​$-&gt;{oid % 2}，ds$-&gt;{0.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/29125988/1666276642360-78d2b92f-36d0-416a-911d-6d73547fef9d.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/29125988/1666276758561-3685f898-8533-44ab-90ce-1b3df27a3bd4.png">
-<meta property="article:published_time" content="2022-12-11T12:09:05.426Z">
-<meta property="article:modified_time" content="2022-12-11T12:11:27.880Z">
+<meta property="article:published_time" content="2022-12-09T13:01:53.000Z">
+<meta property="article:modified_time" content="2022-12-11T12:17:55.082Z">
 <meta property="article:author" content="zhnie">
+<meta property="article:tag" content="Sharding-jdbc">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/29125988/1666276642360-78d2b92f-36d0-416a-911d-6d73547fef9d.png">
   
@@ -78,20 +79,30 @@
       <div class="outer">
         <section id="main"><article id="post-文件夹/Sharding-jdbc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/12/11/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/" class="article-date">
-  <time class="dt-published" datetime="2022-12-11T12:09:05.426Z" itemprop="datePublished">2022-12-11</time>
+    <a href="/2022/12/09/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/" class="article-date">
+  <time class="dt-published" datetime="2022-12-09T13:01:53.000Z" itemprop="datePublished">2022-12-09</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Sharding-jdbc
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h1 id="Sharding-jdbc"><a href="#Sharding-jdbc" class="headerlink" title="Sharding-jdbc"></a>Sharding-jdbc</h1><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><p>垂直分库：多个库，分别查不同表； ds0.t_order，ds1.t_user</p>
 <p>水平分表：多个库，分别存结构类似的表；ds0:t_order_0 ，ds1:t_order_1</p>
 <p>水平分库：多个库，根据算法得出不同库，不同表；（比水平分表多了一个条件）</p>
-<p> ds$-&gt;{status % 2} ，t_order_$-&gt;{oid % 2}，ds$-&gt;{0..1}.t_order_$-&gt;{0..1}</p>
+<p> ds$-&gt;{status % 2} ，t_order_​$-&gt;{oid % 2}，ds$-&gt;{0..1}.t_order_​$-&gt;{0..1}</p>
 <h2 id="1-依赖"><a href="#1-依赖" class="headerlink" title="1.依赖"></a>1.依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  sharding-jdbc 场景依赖      --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shardingsphere<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sharding-jdbc-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="2-1-垂直分库"><a href="#2-1-垂直分库" class="headerlink" title="2.1 垂直分库"></a>2.1 垂直分库</h2><p>在不同库中，分别查不同的表</p>
@@ -142,20 +153,31 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/11/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/" data-id="clbjbsmfx0005vov46097cg4d" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/09/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/" data-id="clbjc0txx0005tcv4bwa98ofb" data-title="Sharding-jdbc" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sharding-jdbc/" rel="tag">Sharding-jdbc</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
+    <a href="/2022/12/09/arthas/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          arthas
+        
+      </div>
+    </a>
   
-    <a href="/2022/12/09/stream/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2022/12/09/startHexo/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Util api</div>
+      <div class="article-nav-title">start Hexo</div>
     </a>
   
 </nav>
@@ -175,7 +197,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arthas/" rel="tag">arthas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/util/" rel="tag">util</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sharding-jdbc/" rel="tag">Sharding-jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arthas/" rel="tag">arthas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/util/" rel="tag">util</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
     </div>
   </div>
 
@@ -185,7 +207,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/arthas/" style="font-size: 10px;">arthas</a> <a href="/tags/util/" style="font-size: 10px;">util</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a>
+      <a href="/tags/Sharding-jdbc/" style="font-size: 10px;">Sharding-jdbc</a> <a href="/tags/arthas/" style="font-size: 10px;">arthas</a> <a href="/tags/util/" style="font-size: 10px;">util</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a>
     </div>
   </div>
 
@@ -207,10 +229,6 @@
       <ul>
         
           <li>
-            <a href="/2022/12/11/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/">(no title)</a>
-          </li>
-        
-          <li>
             <a href="/2022/12/09/stream/">Util api</a>
           </li>
         
@@ -219,11 +237,15 @@
           </li>
         
           <li>
-            <a href="/2022/12/09/arthas/">zihan</a>
+            <a href="/2022/12/09/arthas/">arthas</a>
           </li>
         
           <li>
-            <a href="/2022/12/09/startHexo/">Hello World</a>
+            <a href="/2022/12/09/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/">Sharding-jdbc</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/09/startHexo/">start Hexo</a>
           </li>
         
       </ul>
