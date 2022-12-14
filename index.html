@@ -177,22 +177,42 @@
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-时间轴">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            时间轴
           </a>
         </li>
       
@@ -215,220 +235,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/stream/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="note">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/12/09/stream/" itemprop="url">Util api</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-09T21:53:13+08:00">
-                2022-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Util方法"><a href="#Util方法" class="headerlink" title="Util方法"></a>Util方法</h1><h2 id="1-Stream-Collectors类"><a href="#1-Stream-Collectors类" class="headerlink" title="1.Stream  Collectors类"></a>1.Stream  Collectors类</h2><h3 id="1-1-场景"><a href="#1-1-场景" class="headerlink" title="1.1 场景"></a>1.1 场景</h3><h4 id="1-1-1将名称累积到列表中"><a href="#1-1-1将名称累积到列表中" class="headerlink" title="1.1.1将名称累积到列表中"></a>1.1.1将名称累积到列表中</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = people.stream().map(Person::getName).collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-2将元素转换为字符串并连接它们，用逗号分隔"><a href="#1-1-2将元素转换为字符串并连接它们，用逗号分隔" class="headerlink" title="1.1.2将元素转换为字符串并连接它们，用逗号分隔"></a>1.1.2将元素转换为字符串并连接它们，用逗号分隔</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">joined</span> <span class="operator">=</span> things.stream().map(Object::toString).collect(Collectors.joining(<span class="string">&quot;, &quot;</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-3计算员工工资总额"><a href="#1-1-3计算员工工资总额" class="headerlink" title="1.1.3计算员工工资总额"></a>1.1.3计算员工工资总额</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> employees.stream().collect(Collectors.summingInt(Employee::getSalary)));</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-4按部门分组员工"><a href="#1-1-4按部门分组员工" class="headerlink" title="1.1.4按部门分组员工"></a>1.1.4按部门分组员工</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Department, List&lt;Employee&gt;&gt; byDept</span><br><span class="line">		= employees.stream().collect(Collectors.groupingBy(Employee::getDepartment));</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-5按部门计算工资总额"><a href="#1-1-5按部门计算工资总额" class="headerlink" title="1.1.5按部门计算工资总额"></a>1.1.5按部门计算工资总额</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Department, Integer&gt; totalByDept</span><br><span class="line">         = employees.stream()</span><br><span class="line">  			.collect(Collectors.groupingBy(Employee::getDepartment,</span><br><span class="line">                      Collectors.summingInt(Employee::getSalary)));</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-6将学生分为及格和不及格"><a href="#1-1-6将学生分为及格和不及格" class="headerlink" title="1.1.6将学生分为及格和不及格"></a>1.1.6将学生分为及格和不及格</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Student&gt;&gt; passingFailing =</span><br><span class="line">    students.stream()</span><br><span class="line">           .collect(Collectors.partitioningBy(s -&gt; s.getGrade() &gt;= PASS_THRESHOLD));</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-2-api"><a href="#1-2-api" class="headerlink" title="1.2 api"></a>1.2 api</h3><h4 id="1-2-1Collectors-toList"><a href="#1-2-1Collectors-toList" class="headerlink" title="1.2.1Collectors.toList()"></a>1.2.1Collectors.toList()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将stream转换为list。这里转换的list是ArrayList，如果想要转换成特定的list，需要使用toCollection方法。</span></span><br><span class="line">List&lt;String&gt; listResult = list.stream().collect(Collectors.toList());</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,listResult);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-2Collectors-toSet"><a href="#1-2-2Collectors-toSet" class="headerlink" title="1.2.2Collectors.toSet()"></a>1.2.2Collectors.toSet()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//toSet将Stream转换成为set。这里转换的是HashSet。如果需要特别指定set，那么需要使用toCollection方法。</span></span><br><span class="line">Set&lt;String&gt; setResult = list.stream().collect(Collectors.toSet());</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,setResult);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-3Collectors-toCollection"><a href="#1-2-3Collectors-toCollection" class="headerlink" title="1.2.3Collectors.toCollection"></a>1.2.3Collectors.toCollection</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//上面的toMap,toSet转换出来的都是特定的类型，如果我们需要自定义，</span></span><br><span class="line"><span class="comment">// 则可以使用toCollection(),转换成了LinkedList</span></span><br><span class="line">List&lt;String&gt; custListResult = list.stream().collect(Collectors.toCollection(LinkedList::<span class="keyword">new</span>));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,custListResult);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-4Collectors-toMap"><a href="#1-2-4Collectors-toMap" class="headerlink" title="1.2.4Collectors.toMap"></a>1.2.4Collectors.toMap</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// toMap接收两个参数，第一个参数是keyMapper，第二个参数是valueMapper</span></span><br><span class="line"><span class="comment">// 如果stream中有重复的值，则转换会报IllegalStateException异常：</span></span><br><span class="line">Map&lt;String, Integer&gt; mapResult = list.stream()</span><br><span class="line">                .collect(Collectors.toMap(Function.identity(), String::length));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,mapResult);</span><br><span class="line"></span><br><span class="line"><span class="comment">//toMap中添加第三个参数mergeFunction，来解决冲突</span></span><br><span class="line">Map&lt;String, Integer&gt; duplicateMapResult2 = duplicateList.stream()</span><br><span class="line">                .collect(Collectors.toMap(Function.identity(), String::length, </span><br><span class="line">                 (item, identicalItem) -&gt; item));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,duplicateMapResult2);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-5Collectors-collectingAndThen"><a href="#1-2-5Collectors-collectingAndThen" class="headerlink" title="1.2.5Collectors.collectingAndThen"></a>1.2.5Collectors.collectingAndThen</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// collectingAndThen允许我们对生成的集合再做一次操作。</span></span><br><span class="line">List&lt;String&gt; collectAndThenResult = list.stream()</span><br><span class="line">                .collect(Collectors.collectingAndThen(Collectors.toList(), </span><br><span class="line">                 l -&gt; &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(l);&#125;));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,collectAndThenResult);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-6Collectors-joining"><a href="#1-2-6Collectors-joining" class="headerlink" title="1.2.6Collectors.joining()"></a>1.2.6Collectors.joining()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Joining用来连接stream中的元素</span></span><br><span class="line"><span class="comment">// 可以不带参数，也可以带一个参数，也可以带三个参数，根据我们的需要进行选择。</span></span><br><span class="line"><span class="type">String</span> <span class="variable">joinResult</span> <span class="operator">=</span> list.stream().collect(Collectors.joining());</span><br><span class="line"><span class="type">String</span> <span class="variable">joinResult1</span> <span class="operator">=</span> list.stream().collect(Collectors.joining(<span class="string">&quot; &quot;</span>));</span><br><span class="line"><span class="type">String</span> <span class="variable">joinResult2</span> <span class="operator">=</span> list.stream().collect(Collectors.joining(<span class="string">&quot; &quot;</span>, <span class="string">&quot;prefix&quot;</span>,<span class="string">&quot;suffix&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-7Collectors-counting"><a href="#1-2-7Collectors-counting" class="headerlink" title="1.2.7Collectors.counting()"></a>1.2.7Collectors.counting()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counting主要用来统计stream中元素的个数：</span></span><br><span class="line"><span class="type">Long</span> <span class="variable">countResult</span> <span class="operator">=</span> list.stream().collect(Collectors.counting());</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,countResult);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-8Collectors-summarizingDouble-x2F-Long-x2F-Int"><a href="#1-2-8Collectors-summarizingDouble-x2F-Long-x2F-Int" class="headerlink" title="1.2.8Collectors.summarizingDouble&#x2F;Long&#x2F;Int()"></a>1.2.8Collectors.summarizingDouble&#x2F;Long&#x2F;Int()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SummarizingDouble/Long/Int为stream中的元素生成了统计信息，返回的结果是一个统计类：</span></span><br><span class="line"><span class="type">IntSummaryStatistics</span> <span class="variable">intResult</span> <span class="operator">=</span> list.stream()</span><br><span class="line">                .collect(Collectors.summarizingInt(String::length));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,intResult);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输出结果：</span><br><span class="line">IntSummaryStatistics&#123;count=4, sum=16, min=3, average=4.000000, max=5&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="1-2-8-1Collectors-averagingDouble-x2F-Long-x2F-Int"><a href="#1-2-8-1Collectors-averagingDouble-x2F-Long-x2F-Int" class="headerlink" title="1.2.8.1Collectors.averagingDouble&#x2F;Long&#x2F;Int()"></a>1.2.8.1Collectors.averagingDouble&#x2F;Long&#x2F;Int()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// averagingDouble/Long/Int()对stream中的元素做平均：</span></span><br><span class="line"><span class="type">Double</span> <span class="variable">averageResult</span> <span class="operator">=</span> list.stream().collect(Collectors.averagingInt(String::length));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,averageResult);</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="1-2-8-2Collectors-maxBy-x2F-minBy"><a href="#1-2-8-2Collectors-maxBy-x2F-minBy" class="headerlink" title="1.2.8.2Collectors.maxBy()&#x2F;minBy()"></a>1.2.8.2Collectors.maxBy()&#x2F;minBy()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// maxBy()/minBy()根据提供的Comparator，返回stream中的最大或者最小值：</span></span><br><span class="line">Optional&lt;String&gt; maxByResult = list.stream().collect(Collectors.maxBy(Comparator.naturalOrder()));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,maxByResult);d</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-2-9Collectors-groupingBy"><a href="#1-2-9Collectors-groupingBy" class="headerlink" title="1.2.9Collectors.groupingBy()"></a>1.2.9Collectors.groupingBy()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GroupingBy根据某些属性进行分组，并返回一个Map：</span></span><br><span class="line">Optional&lt;String&gt; maxByResult = list.stream().collect(Collectors.maxBy(Comparator.naturalOrder()));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,maxByResult);d</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-2-10Collectors-partitioningBy"><a href="#1-2-10Collectors-partitioningBy" class="headerlink" title="1.2.10Collectors.partitioningBy()"></a>1.2.10Collectors.partitioningBy()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PartitioningBy是一个特别的groupingBy，PartitioningBy返回一个Map，这个Map是以boolean值为key，从而将stream分成两部分，一部分是匹配PartitioningBy条件的，一部分是不满足条件的：</span></span><br><span class="line">Map&lt;Boolean, List&lt;String&gt;&gt; partitionResult = list.stream()</span><br><span class="line">                .collect(Collectors.partitioningBy(s -&gt; s.length() &gt; <span class="number">3</span>));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,partitionResult);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="2-List"><a href="#2-List" class="headerlink" title="2.List"></a>2.List</h2><h3 id="2-1Collections"><a href="#2-1Collections" class="headerlink" title="2.1Collections"></a>2.1Collections</h3><h4 id="2-1-1排序"><a href="#2-1-1排序" class="headerlink" title="2.1.1排序"></a>2.1.1排序</h4><ul>
-<li>void reverse(List list)：对指定 List 集合元素进行逆向排序。</li>
-<li>void shuffle(List list)：对 List 集合元素进行随机排序（shuffle 方法模拟了“洗牌”动作）。</li>
-<li>void shuffle(List list)：对 List 集合元素进行随机排序（shuffle 方法模拟了“洗牌”动作）。</li>
-<li>void sort(List list, Comparator c)：根据指定 Comparator 产生的顺序对 List 集合元素进行排序。</li>
-<li>void swap(List list, int i, int j)：将指定 List 集合中的 i 处元素和 j 处元素进行交换。</li>
-<li>void rotate(List list, int distance)：当 distance 为正数时，将 list 集合的后 distance 个元素“整体”移到前面；当 distance 为负数时，将 list 集合的前 distance 个元素“整体”移到后面。该方法不会改变集合的长度。</li>
-</ul>
-<h4 id="2-1-2查找替换"><a href="#2-1-2查找替换" class="headerlink" title="2.1.2查找替换"></a>2.1.2查找替换</h4><ul>
-<li>int binarySearch(List list, Object key)：使用二分搜索法搜索指定的 List 集合，以获得指定对象在 List 集合中的索引。如果要使该方法可以正常工作，则必须保证 List 中的元素已经处于有序状态。</li>
-<li>Object max(Collection coll)：根据元素的自然顺序，返回给定集合中的最大元素。</li>
-<li>Object min(Collection coll)：根据元素的自然顺序，返回给定集合中的最小元素。</li>
-<li>Object min(Collection coll, Comparator comp)：根据 Comparator 指定的顺序，返回给定集合中的最小元素。<br>void fill(List list, Object obj)：使用指定元素 obj 替换指定 List 集合中的所有元素。</li>
-<li>int frequency(Collection c, Object o)：返回指定集合中指定元素的出现次数。</li>
-<li>int indexOfSubList(List source, List target)：返回子 List 对象在父 List 对象中第一次出现的位置索引；如果父 List 中没有出现这样的子 List，则返回 -1。</li>
-<li>int lastIndexOfSubList(List source, List target)：返回子 List 对象在父 List 对象中最后一次出现的位置索引；如果父 List 中没有岀现这样的子 List，则返回 -1。</li>
-<li>boolean replaceAll(List list, Object oldVal, Object newVal)：使用一个新值 newVal 替换 List 对象的所有旧值 oldVal。</li>
-</ul>
-<h4 id="2-1-2-复制"><a href="#2-1-2-复制" class="headerlink" title="2.1.2 复制"></a>2.1.2 复制</h4><ul>
-<li>void copy(List &lt;? super T&gt; dest,List&lt;? extends T&gt; src)</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -1350,6 +1156,220 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/stream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/09/stream/" itemprop="url">Util api</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-09T21:53:13+08:00">
+                2022-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Util方法"><a href="#Util方法" class="headerlink" title="Util方法"></a>Util方法</h1><h2 id="1-Stream-Collectors类"><a href="#1-Stream-Collectors类" class="headerlink" title="1.Stream  Collectors类"></a>1.Stream  Collectors类</h2><h3 id="1-1-场景"><a href="#1-1-场景" class="headerlink" title="1.1 场景"></a>1.1 场景</h3><h4 id="1-1-1将名称累积到列表中"><a href="#1-1-1将名称累积到列表中" class="headerlink" title="1.1.1将名称累积到列表中"></a>1.1.1将名称累积到列表中</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = people.stream().map(Person::getName).collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-2将元素转换为字符串并连接它们，用逗号分隔"><a href="#1-1-2将元素转换为字符串并连接它们，用逗号分隔" class="headerlink" title="1.1.2将元素转换为字符串并连接它们，用逗号分隔"></a>1.1.2将元素转换为字符串并连接它们，用逗号分隔</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">joined</span> <span class="operator">=</span> things.stream().map(Object::toString).collect(Collectors.joining(<span class="string">&quot;, &quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-3计算员工工资总额"><a href="#1-1-3计算员工工资总额" class="headerlink" title="1.1.3计算员工工资总额"></a>1.1.3计算员工工资总额</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> employees.stream().collect(Collectors.summingInt(Employee::getSalary)));</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-4按部门分组员工"><a href="#1-1-4按部门分组员工" class="headerlink" title="1.1.4按部门分组员工"></a>1.1.4按部门分组员工</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Department, List&lt;Employee&gt;&gt; byDept</span><br><span class="line">		= employees.stream().collect(Collectors.groupingBy(Employee::getDepartment));</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-5按部门计算工资总额"><a href="#1-1-5按部门计算工资总额" class="headerlink" title="1.1.5按部门计算工资总额"></a>1.1.5按部门计算工资总额</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Department, Integer&gt; totalByDept</span><br><span class="line">         = employees.stream()</span><br><span class="line">  			.collect(Collectors.groupingBy(Employee::getDepartment,</span><br><span class="line">                      Collectors.summingInt(Employee::getSalary)));</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-6将学生分为及格和不及格"><a href="#1-1-6将学生分为及格和不及格" class="headerlink" title="1.1.6将学生分为及格和不及格"></a>1.1.6将学生分为及格和不及格</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Student&gt;&gt; passingFailing =</span><br><span class="line">    students.stream()</span><br><span class="line">           .collect(Collectors.partitioningBy(s -&gt; s.getGrade() &gt;= PASS_THRESHOLD));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-2-api"><a href="#1-2-api" class="headerlink" title="1.2 api"></a>1.2 api</h3><h4 id="1-2-1Collectors-toList"><a href="#1-2-1Collectors-toList" class="headerlink" title="1.2.1Collectors.toList()"></a>1.2.1Collectors.toList()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将stream转换为list。这里转换的list是ArrayList，如果想要转换成特定的list，需要使用toCollection方法。</span></span><br><span class="line">List&lt;String&gt; listResult = list.stream().collect(Collectors.toList());</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,listResult);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-2Collectors-toSet"><a href="#1-2-2Collectors-toSet" class="headerlink" title="1.2.2Collectors.toSet()"></a>1.2.2Collectors.toSet()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//toSet将Stream转换成为set。这里转换的是HashSet。如果需要特别指定set，那么需要使用toCollection方法。</span></span><br><span class="line">Set&lt;String&gt; setResult = list.stream().collect(Collectors.toSet());</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,setResult);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-3Collectors-toCollection"><a href="#1-2-3Collectors-toCollection" class="headerlink" title="1.2.3Collectors.toCollection"></a>1.2.3Collectors.toCollection</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//上面的toMap,toSet转换出来的都是特定的类型，如果我们需要自定义，</span></span><br><span class="line"><span class="comment">// 则可以使用toCollection(),转换成了LinkedList</span></span><br><span class="line">List&lt;String&gt; custListResult = list.stream().collect(Collectors.toCollection(LinkedList::<span class="keyword">new</span>));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,custListResult);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-4Collectors-toMap"><a href="#1-2-4Collectors-toMap" class="headerlink" title="1.2.4Collectors.toMap"></a>1.2.4Collectors.toMap</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// toMap接收两个参数，第一个参数是keyMapper，第二个参数是valueMapper</span></span><br><span class="line"><span class="comment">// 如果stream中有重复的值，则转换会报IllegalStateException异常：</span></span><br><span class="line">Map&lt;String, Integer&gt; mapResult = list.stream()</span><br><span class="line">                .collect(Collectors.toMap(Function.identity(), String::length));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,mapResult);</span><br><span class="line"></span><br><span class="line"><span class="comment">//toMap中添加第三个参数mergeFunction，来解决冲突</span></span><br><span class="line">Map&lt;String, Integer&gt; duplicateMapResult2 = duplicateList.stream()</span><br><span class="line">                .collect(Collectors.toMap(Function.identity(), String::length, </span><br><span class="line">                 (item, identicalItem) -&gt; item));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,duplicateMapResult2);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-5Collectors-collectingAndThen"><a href="#1-2-5Collectors-collectingAndThen" class="headerlink" title="1.2.5Collectors.collectingAndThen"></a>1.2.5Collectors.collectingAndThen</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// collectingAndThen允许我们对生成的集合再做一次操作。</span></span><br><span class="line">List&lt;String&gt; collectAndThenResult = list.stream()</span><br><span class="line">                .collect(Collectors.collectingAndThen(Collectors.toList(), </span><br><span class="line">                 l -&gt; &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(l);&#125;));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,collectAndThenResult);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-6Collectors-joining"><a href="#1-2-6Collectors-joining" class="headerlink" title="1.2.6Collectors.joining()"></a>1.2.6Collectors.joining()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Joining用来连接stream中的元素</span></span><br><span class="line"><span class="comment">// 可以不带参数，也可以带一个参数，也可以带三个参数，根据我们的需要进行选择。</span></span><br><span class="line"><span class="type">String</span> <span class="variable">joinResult</span> <span class="operator">=</span> list.stream().collect(Collectors.joining());</span><br><span class="line"><span class="type">String</span> <span class="variable">joinResult1</span> <span class="operator">=</span> list.stream().collect(Collectors.joining(<span class="string">&quot; &quot;</span>));</span><br><span class="line"><span class="type">String</span> <span class="variable">joinResult2</span> <span class="operator">=</span> list.stream().collect(Collectors.joining(<span class="string">&quot; &quot;</span>, <span class="string">&quot;prefix&quot;</span>,<span class="string">&quot;suffix&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-7Collectors-counting"><a href="#1-2-7Collectors-counting" class="headerlink" title="1.2.7Collectors.counting()"></a>1.2.7Collectors.counting()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counting主要用来统计stream中元素的个数：</span></span><br><span class="line"><span class="type">Long</span> <span class="variable">countResult</span> <span class="operator">=</span> list.stream().collect(Collectors.counting());</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,countResult);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-8Collectors-summarizingDouble-x2F-Long-x2F-Int"><a href="#1-2-8Collectors-summarizingDouble-x2F-Long-x2F-Int" class="headerlink" title="1.2.8Collectors.summarizingDouble&#x2F;Long&#x2F;Int()"></a>1.2.8Collectors.summarizingDouble&#x2F;Long&#x2F;Int()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SummarizingDouble/Long/Int为stream中的元素生成了统计信息，返回的结果是一个统计类：</span></span><br><span class="line"><span class="type">IntSummaryStatistics</span> <span class="variable">intResult</span> <span class="operator">=</span> list.stream()</span><br><span class="line">                .collect(Collectors.summarizingInt(String::length));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,intResult);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输出结果：</span><br><span class="line">IntSummaryStatistics&#123;count=4, sum=16, min=3, average=4.000000, max=5&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="1-2-8-1Collectors-averagingDouble-x2F-Long-x2F-Int"><a href="#1-2-8-1Collectors-averagingDouble-x2F-Long-x2F-Int" class="headerlink" title="1.2.8.1Collectors.averagingDouble&#x2F;Long&#x2F;Int()"></a>1.2.8.1Collectors.averagingDouble&#x2F;Long&#x2F;Int()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// averagingDouble/Long/Int()对stream中的元素做平均：</span></span><br><span class="line"><span class="type">Double</span> <span class="variable">averageResult</span> <span class="operator">=</span> list.stream().collect(Collectors.averagingInt(String::length));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,averageResult);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="1-2-8-2Collectors-maxBy-x2F-minBy"><a href="#1-2-8-2Collectors-maxBy-x2F-minBy" class="headerlink" title="1.2.8.2Collectors.maxBy()&#x2F;minBy()"></a>1.2.8.2Collectors.maxBy()&#x2F;minBy()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// maxBy()/minBy()根据提供的Comparator，返回stream中的最大或者最小值：</span></span><br><span class="line">Optional&lt;String&gt; maxByResult = list.stream().collect(Collectors.maxBy(Comparator.naturalOrder()));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,maxByResult);d</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-9Collectors-groupingBy"><a href="#1-2-9Collectors-groupingBy" class="headerlink" title="1.2.9Collectors.groupingBy()"></a>1.2.9Collectors.groupingBy()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GroupingBy根据某些属性进行分组，并返回一个Map：</span></span><br><span class="line">Optional&lt;String&gt; maxByResult = list.stream().collect(Collectors.maxBy(Comparator.naturalOrder()));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,maxByResult);d</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-10Collectors-partitioningBy"><a href="#1-2-10Collectors-partitioningBy" class="headerlink" title="1.2.10Collectors.partitioningBy()"></a>1.2.10Collectors.partitioningBy()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PartitioningBy是一个特别的groupingBy，PartitioningBy返回一个Map，这个Map是以boolean值为key，从而将stream分成两部分，一部分是匹配PartitioningBy条件的，一部分是不满足条件的：</span></span><br><span class="line">Map&lt;Boolean, List&lt;String&gt;&gt; partitionResult = list.stream()</span><br><span class="line">                .collect(Collectors.partitioningBy(s -&gt; s.length() &gt; <span class="number">3</span>));</span><br><span class="line">        log.info(<span class="string">&quot;&#123;&#125;&quot;</span>,partitionResult);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-List"><a href="#2-List" class="headerlink" title="2.List"></a>2.List</h2><h3 id="2-1Collections"><a href="#2-1Collections" class="headerlink" title="2.1Collections"></a>2.1Collections</h3><h4 id="2-1-1排序"><a href="#2-1-1排序" class="headerlink" title="2.1.1排序"></a>2.1.1排序</h4><ul>
+<li>void reverse(List list)：对指定 List 集合元素进行逆向排序。</li>
+<li>void shuffle(List list)：对 List 集合元素进行随机排序（shuffle 方法模拟了“洗牌”动作）。</li>
+<li>void shuffle(List list)：对 List 集合元素进行随机排序（shuffle 方法模拟了“洗牌”动作）。</li>
+<li>void sort(List list, Comparator c)：根据指定 Comparator 产生的顺序对 List 集合元素进行排序。</li>
+<li>void swap(List list, int i, int j)：将指定 List 集合中的 i 处元素和 j 处元素进行交换。</li>
+<li>void rotate(List list, int distance)：当 distance 为正数时，将 list 集合的后 distance 个元素“整体”移到前面；当 distance 为负数时，将 list 集合的前 distance 个元素“整体”移到后面。该方法不会改变集合的长度。</li>
+</ul>
+<h4 id="2-1-2查找替换"><a href="#2-1-2查找替换" class="headerlink" title="2.1.2查找替换"></a>2.1.2查找替换</h4><ul>
+<li>int binarySearch(List list, Object key)：使用二分搜索法搜索指定的 List 集合，以获得指定对象在 List 集合中的索引。如果要使该方法可以正常工作，则必须保证 List 中的元素已经处于有序状态。</li>
+<li>Object max(Collection coll)：根据元素的自然顺序，返回给定集合中的最大元素。</li>
+<li>Object min(Collection coll)：根据元素的自然顺序，返回给定集合中的最小元素。</li>
+<li>Object min(Collection coll, Comparator comp)：根据 Comparator 指定的顺序，返回给定集合中的最小元素。<br>void fill(List list, Object obj)：使用指定元素 obj 替换指定 List 集合中的所有元素。</li>
+<li>int frequency(Collection c, Object o)：返回指定集合中指定元素的出现次数。</li>
+<li>int indexOfSubList(List source, List target)：返回子 List 对象在父 List 对象中第一次出现的位置索引；如果父 List 中没有出现这样的子 List，则返回 -1。</li>
+<li>int lastIndexOfSubList(List source, List target)：返回子 List 对象在父 List 对象中最后一次出现的位置索引；如果父 List 中没有岀现这样的子 List，则返回 -1。</li>
+<li>boolean replaceAll(List list, Object oldVal, Object newVal)：使用一个新值 newVal 替换 List 对象的所有旧值 oldVal。</li>
+</ul>
+<h4 id="2-1-2-复制"><a href="#2-1-2-复制" class="headerlink" title="2.1.2 复制"></a>2.1.2 复制</h4><ul>
+<li>void copy(List &lt;? super T&gt; dest,List&lt;? extends T&gt; src)</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/arthas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1826,7 +1846,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
                   <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
