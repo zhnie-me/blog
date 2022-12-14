@@ -1,12 +1,85 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>多线程 | note</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="相关文章 并发面试题https:&#x2F;&#x2F;www.javazhiyin.com&#x2F;32391.html java锁文章 Java 内存模型Java 内存模型试图屏蔽各种硬件和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到一致的内存访问效果。 主内存与工作内存处理器上的寄存器的读写的速度比内存快几个数量级，为了解决这种速度矛盾，在它们之间加入了高速缓存。 加入高速缓存带来了一个新的问题">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多线程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="相关文章 并发面试题https:&#x2F;&#x2F;www.javazhiyin.com&#x2F;32391.html java锁文章 Java 内存模型Java 内存模型试图屏蔽各种硬件和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到一致的内存访问效果。 主内存与工作内存处理器上的寄存器的读写的速度比内存快几个数量级，为了解决这种速度矛盾，在它们之间加入了高速缓存。 加入高速缓存带来了一个新的问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程">
 <meta property="og:url" content="http://example.com/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
@@ -30,83 +103,214 @@
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://camo.githubusercontent.com/7e289aaee2d8533d8870f92659a8984be81eb432/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f39343263613064322d396435632d343561342d383963622d3566643839623631393133662e706e67">
-  
-    <link rel="alternate" href="/atom.xml" title="note" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/12/09/多线程/"/>
+
+
+
+
+
+  <title>多线程 | note</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">note</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
+        <p class="site-subtitle"></p>
+      
   </div>
-</header>
 
-      <div class="outer">
-        <section id="main"><article id="post-多线程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-date">
-  <time class="dt-published" datetime="2022-12-09T13:53:13.000Z" itemprop="datePublished">2022-12-09</time>
-</a>
-    
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      多线程
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多线程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-09T21:53:13+08:00">
+                2022-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p>相关文章</p>
 <p>并发面试题<br><a target="_blank" rel="noopener" href="https://www.javazhiyin.com/32391.html">https://www.javazhiyin.com/32391.html</a></p>
@@ -899,148 +1103,372 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="clbnmhj4x000440v4c967g5m5" data-title="多线程" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/12/09/arthas/" rel="next" title="arthas">
+                <i class="fa fa-chevron-left"></i> arthas
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/12/09/stream/" rel="prev" title="Util api">
+                Util api <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2022/12/09/stream/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Util api
-        
-      </div>
-    </a>
   
   
-    <a href="/2022/12/09/arthas/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">arthas</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sharding-jdbc/" rel="tag">Sharding-jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arthas/" rel="tag">arthas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/util/" rel="tag">util</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Sharding-jdbc/" style="font-size: 10px;">Sharding-jdbc</a> <a href="/tags/arthas/" style="font-size: 10px;">arthas</a> <a href="/tags/util/" style="font-size: 10px;">util</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/12/09/stream/">Util api</a>
-          </li>
-        
-          <li>
-            <a href="/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
-          </li>
-        
-          <li>
-            <a href="/2022/12/09/arthas/">arthas</a>
-          </li>
-        
-          <li>
-            <a href="/2022/12/09/%E6%96%87%E4%BB%B6%E5%A4%B9/Sharding-jdbc/">Sharding-jdbc</a>
-          </li>
-        
-          <li>
-            <a href="/2022/12/09/startHexo/">start Hexo</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 zhnie<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">Java 内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%86%85%E5%AD%98%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AD%98"><span class="nav-number">2.</span> <span class="nav-text">主内存与工作内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E9%97%B4%E4%BA%A4%E4%BA%92%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">内存间交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%A0%B8-CPU-%E5%92%8C%E5%A4%9A%E6%A0%B8-CPU"><span class="nav-number">4.</span> <span class="nav-text">单核 CPU 和多核 CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E4%BA%86%E8%A7%A3%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">5.</span> <span class="nav-text">应该了解的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%88%E9%80%82"><span class="nav-number">6.</span> <span class="nav-text">创建多少个线程合适</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU-%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F"><span class="nav-number">6.1.</span> <span class="nav-text">CPU 密集型程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-x2F-O%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F"><span class="nav-number">7.</span> <span class="nav-text">I&#x2F;O密集型程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU-%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%88%E9%80%82%EF%BC%9F"><span class="nav-number">7.1.</span> <span class="nav-text">CPU 密集型程序创建多少个线程合适？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">8.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">8.1.</span> <span class="nav-text">多线程的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B"><span class="nav-number">8.2.</span> <span class="nav-text">进程 线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">8.3.</span> <span class="nav-text">高并发与多线程的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">8.4.</span> <span class="nav-text">线程状态、生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-number">8.5.</span> <span class="nav-text">上下文切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">8.6.</span> <span class="nav-text">创建线程的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Thread%E5%92%8CRunnable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">8.6.1.</span> <span class="nav-text">Thread和Runnable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Runnable%E5%92%8CCallable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">8.6.2.</span> <span class="nav-text">Runnable和Callable的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">9.</span> <span class="nav-text">实例变量与线程安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">线程的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%BC%8Estart-%EF%BC%9A"><span class="nav-number">10.1.</span> <span class="nav-text">1．start() ：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%BC%8Erun"><span class="nav-number">10.2.</span> <span class="nav-text">2．run():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%EF%BC%8E%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0%E2%80%94%E2%80%94sleep-int-millsecond"><span class="nav-number">10.3.</span> <span class="nav-text">3．线程休眠——sleep(int millsecond):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%EF%BC%8EisAlive"><span class="nav-number">10.4.</span> <span class="nav-text">4．isAlive():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%EF%BC%8EcurrentThread"><span class="nav-number">10.5.</span> <span class="nav-text">5．currentThread():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6%EF%BC%8Einterrupt-%EF%BC%9A"><span class="nav-number">10.6.</span> <span class="nav-text">6．interrupt() ：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-getId-%EF%BC%9A"><span class="nav-number">10.7.</span> <span class="nav-text">7. getId()：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-yield"><span class="nav-number">10.8.</span> <span class="nav-text">8.  yield():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-suspend"><span class="nav-number">10.9.</span> <span class="nav-text">9. suspend():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-resume-%EF%BC%9A"><span class="nav-number">10.10.</span> <span class="nav-text">10. resume()：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-join"><span class="nav-number">10.11.</span> <span class="nav-text">11. join():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-wait"><span class="nav-number">10.12.</span> <span class="nav-text">12. wait() :</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-notify"><span class="nav-number">10.13.</span> <span class="nav-text">14. notify() :</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-notifyAll-%EF%BC%9A"><span class="nav-number">10.14.</span> <span class="nav-text">15. notifyAll()：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8BDaemon"><span class="nav-number">10.15.</span> <span class="nav-text">守护线程Daemon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#run-%E5%92%8Cstart-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.16.</span> <span class="nav-text">run() 和start()的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sleep-%E5%92%8Cwait-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.17.</span> <span class="nav-text">sleep() 和wait()的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6%E2%80%94%E2%80%94%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">10.18.</span> <span class="nav-text">线程调度——优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isAlive"><span class="nav-number">10.19.</span> <span class="nav-text">isAlive()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sleep"><span class="nav-number">10.20.</span> <span class="nav-text">Sleep()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#interrupt"><span class="nav-number">10.21.</span> <span class="nav-text">interrupt()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#interrupted"><span class="nav-number">10.22.</span> <span class="nav-text">interrupted()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isInterrupted"><span class="nav-number">10.23.</span> <span class="nav-text">isInterrupted()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wait-notify-notifyAll"><span class="nav-number">11.</span> <span class="nav-text">wait() notify() notifyAll()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wait%EF%BC%88%EF%BC%89"><span class="nav-number">11.1.</span> <span class="nav-text">wait（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#notify%EF%BC%88%EF%BC%89%E5%92%8CnotifyAll%EF%BC%88%EF%BC%89"><span class="nav-number">11.2.</span> <span class="nav-text">notify（）和notifyAll（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">11.3.</span> <span class="nav-text">执行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E7%BA%BF%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">停止线程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#stop%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="nav-number">12.0.1.</span> <span class="nav-text">stop不推荐</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E5%81%9C%E7%BA%BF%E7%A8%8B"><span class="nav-number">13.</span> <span class="nav-text">暂停线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">14.</span> <span class="nav-text">线程安全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98"><span class="nav-number">14.1.</span> <span class="nav-text">不可变</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Synchronized-amp-Volatile-amp-ThreadLocal"><span class="nav-number">15.</span> <span class="nav-text">Synchronized &amp; Volatile &amp; ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Synchronized"><span class="nav-number">15.1.</span> <span class="nav-text">Synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized%E7%9A%84%E4%B8%89%E7%A7%8D%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">15.1.1.</span> <span class="nav-text">synchronized的三种应用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#synchronized%E4%BD%9C%E7%94%A8%E4%BA%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">15.1.1.1.</span> <span class="nav-text">synchronized作用于静态方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Volatile"><span class="nav-number">15.2.</span> <span class="nav-text">Volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">15.2.1.</span> <span class="nav-text">内存可见性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="nav-number">15.2.2.</span> <span class="nav-text">禁止指令重排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">15.2.3.</span> <span class="nav-text">Java内存模型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadLocal"><span class="nav-number">15.3.</span> <span class="nav-text">ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ThreadLocal%E4%BB%8B%E7%BB%8D-amp-%E8%B7%B3%E5%87%BA%E8%AF%AF%E5%8C%BA"><span class="nav-number">15.3.1.</span> <span class="nav-text">ThreadLocal介绍&amp;跳出误区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%AC%AC%E4%B8%80%E4%B8%AAget-%E8%BF%94%E5%9B%9Enull"><span class="nav-number">15.3.2.</span> <span class="nav-text">解决第一个get()返回null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ThreadLocal%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">15.3.3.</span> <span class="nav-text">ThreadLocal内存泄露</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#juc"><span class="nav-number">16.</span> <span class="nav-text">juc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-JUC%E7%AE%80%E4%BB%8B"><span class="nav-number">16.1.</span> <span class="nav-text">Java JUC简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lock%E9%94%81"><span class="nav-number">16.2.</span> <span class="nav-text">Lock锁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-number">16.2.1.</span> <span class="nav-text">synchronized的缺陷</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Synchronized-%E5%92%8CLock%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">16.2.2.</span> <span class="nav-text">Synchronized 和Lock的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Lock%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">16.2.3.</span> <span class="nav-text">Lock接口方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#lock"><span class="nav-number">16.2.3.1.</span> <span class="nav-text">lock()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lockInterruptibly"><span class="nav-number">16.2.3.2.</span> <span class="nav-text">lockInterruptibly()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#tryLock"><span class="nav-number">16.2.3.3.</span> <span class="nav-text">tryLock()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#unlock"><span class="nav-number">16.2.3.4.</span> <span class="nav-text">unlock()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#newCondition"><span class="nav-number">16.2.3.5.</span> <span class="nav-text">newCondition()</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ReentrantLock"><span class="nav-number">16.2.4.</span> <span class="nav-text">ReentrantLock</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Condition"><span class="nav-number">16.2.4.1.</span> <span class="nav-text">Condition</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ReentrantReadWriteLock"><span class="nav-number">16.2.5.</span> <span class="nav-text">ReentrantReadWriteLock</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ReentrantLock%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">16.2.6.</span> <span class="nav-text">ReentrantLock实际开发中的应用场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lock%E5%92%8Csynchronized%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">16.3.</span> <span class="nav-text">Lock和synchronized的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81%E4%B8%8E%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="nav-number">16.4.</span> <span class="nav-text">公平锁与非公平锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">17.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CountDownLatch-amp-Semaphore-amp-CyclicBarrier"><span class="nav-number">18.</span> <span class="nav-text">CountDownLatch &amp; Semaphore &amp; CyclicBarrier</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch-%E9%97%AD%E9%94%81"><span class="nav-number">18.1.</span> <span class="nav-text">CountDownLatch(闭锁)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CyclicBarrier-%E5%BE%AA%E7%8E%AF%E6%A0%85%E6%A0%8F"><span class="nav-number">18.2.</span> <span class="nav-text">CyclicBarrier(循环栅栏)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch-%E5%92%8C-CyclicBarrier%E5%8C%BA%E5%88%AB"><span class="nav-number">18.3.</span> <span class="nav-text">CountDownLatch 和 CyclicBarrier区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore"><span class="nav-number">18.4.</span> <span class="nav-text">Semaphore</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CompletableFuture"><span class="nav-number">19.</span> <span class="nav-text">CompletableFuture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96CompletableFuture"><span class="nav-number">19.1.</span> <span class="nav-text">实例化CompletableFuture</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS"><span class="nav-number">20.</span> <span class="nav-text">CAS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFCAS%E6%9C%BA%E5%88%B6"><span class="nav-number">20.1.</span> <span class="nav-text">什么是CAS机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ABA%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">20.2.</span> <span class="nav-text">ABA问题以及解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CAS%E7%9A%84%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">20.3.</span> <span class="nav-text">CAS的缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AQS"><span class="nav-number">21.</span> <span class="nav-text">AQS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E6%97%A0%E9%94%81%E5%B9%B6%E5%8F%91%E6%A1%86%E6%9E%B6Disruptor"><span class="nav-number"></span> <span class="nav-text">高性能无锁并发框架Disruptor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disruptor%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">Disruptor的设计方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number"></span> <span class="nav-text">注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%99%9A%E5%81%87%E5%94%A4%E9%86%92"><span class="nav-number">0.1.</span> <span class="nav-text">多线程中的虚假唤醒</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhnie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
