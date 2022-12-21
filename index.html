@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/java%20base/stream/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/20/docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -302,7 +302,485 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/12/09/java%20base/stream/" itemprop="url">Stream</a></h1>
+                <a class="post-title-link" href="/2022/12/20/docker/" itemprop="url">docker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-20T15:16:38+08:00">
+                2022-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h1><h2 id="1-普通安装jdk"><a href="#1-普通安装jdk" class="headerlink" title="1.普通安装jdk"></a>1.普通安装jdk</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf jdk-8u60-linux-x64.tar.gz -C /usr/lib/jvm</span><br><span class="line"></span><br><span class="line">cd /etc/</span><br><span class="line">cp profile profile.bak</span><br><span class="line">vim  profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在结尾添加</span></span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者</span></span><br><span class="line">JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JAVA_HOME  PATH  CLASSPATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新加载系统配置文件</span></span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line">java -version</span><br><span class="line">java</span><br><span class="line">javac</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-安装docker-compose"><a href="#2-安装docker-compose" class="headerlink" title="2.安装docker-compose"></a>2.安装docker-compose</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">给权限</span></span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看版本</span></span><br><span class="line">docker-compose --version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-docker安装rocketmq"><a href="#3-docker安装rocketmq" class="headerlink" title="3.docker安装rocketmq"></a>3.docker安装rocketmq</h2><h3 id="3-1-文件结构"><a href="#3-1-文件结构" class="headerlink" title="3.1 文件结构"></a>3.1 文件结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker-compose.yml</span><br><span class="line">conf</span><br><span class="line">	- broker.conf</span><br><span class="line">logs</span><br><span class="line">store</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-docker-compose-yml"><a href="#3-2-docker-compose-yml" class="headerlink" title="3.2 docker-compose.yml"></a>3.2 docker-compose.yml</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.5&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">rmqnamesrv:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">foxiswho/rocketmq:server</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rmqnamesrv</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9876</span><span class="string">:9876</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./logs:/opt/logs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./store:/opt/store</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">        <span class="attr">rmq:</span></span><br><span class="line">          <span class="attr">aliases:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">rmqnamesrv</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">rmqbroker:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">foxiswho/rocketmq:broker</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rmqbroker</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">10909</span><span class="string">:10909</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">10911</span><span class="string">:10911</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./logs:/opt/logs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./store:/opt/store</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./conf/broker.conf:/etc/rocketmq/broker.conf</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">NAMESRV_ADDR:</span> <span class="string">&quot;rmqnamesrv:9876&quot;</span></span><br><span class="line">        <span class="attr">JAVA_OPTS:</span> <span class="string">&quot; -Duser.home=/opt&quot;</span></span><br><span class="line">        <span class="attr">JAVA_OPT_EXT:</span> <span class="string">&quot;-server -Xms128m -Xmx128m -Xmn128m&quot;</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">mqbroker</span> <span class="string">-c</span> <span class="string">/etc/rocketmq/broker.conf</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rmqnamesrv</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">rmq:</span></span><br><span class="line">        <span class="attr">aliases:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">rmqbroker</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">rmqconsole:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">styletang/rocketmq-console-ng</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rmqconsole</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8080</span><span class="string">:8080</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">JAVA_OPTS:</span> <span class="string">&quot;-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false&quot;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rmqnamesrv</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">rmq:</span></span><br><span class="line">        <span class="attr">aliases:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">rmqconsole</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">rmq:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">rmq</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-broker-conf"><a href="#3-3-broker-conf" class="headerlink" title="3.3 broker.conf"></a>3.3 broker.conf</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Licensed to the Apache Software Foundation (ASF) under one or more</span></span><br><span class="line"><span class="comment"># contributor license agreements.  See the NOTICE file distributed with</span></span><br><span class="line"><span class="comment"># this work for additional information regarding copyright ownership.</span></span><br><span class="line"><span class="comment"># The ASF licenses this file to You under the Apache License, Version 2.0</span></span><br><span class="line"><span class="comment"># (the &quot;License&quot;); you may not use this file except in compliance with</span></span><br><span class="line"><span class="comment"># the License.  You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#     http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span><br><span class="line"><span class="comment">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment">#  See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment">#  limitations under the License.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 所属集群名字</span></span><br><span class="line"><span class="attr">brokerClusterName</span>=<span class="string">DefaultCluster</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># broker 名字，注意此处不同的配置文件填写的不一样，如果在 broker-a.properties 使用: broker-a,</span></span><br><span class="line"><span class="comment"># 在 broker-b.properties 使用: broker-b</span></span><br><span class="line"><span class="attr">brokerName</span>=<span class="string">broker-a</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 0 表示 Master，&amp;gt; 0 表示 Slave</span></span><br><span class="line"><span class="attr">brokerId</span>=<span class="string">0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># nameServer地址，分号分割</span></span><br><span class="line"><span class="comment"># namesrvAddr=rocketmq-nameserver1:9876;rocketmq-nameserver2:9876</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 启动IP,如果 docker 报 com.alibaba.rocketmq.remoting.exception.RemotingConnectException: connect to &amp;lt;192.168.0.120:10909&amp;gt; failed</span></span><br><span class="line"><span class="comment"># 解决方式1 加上一句 producer.setVipChannelEnabled(false);，解决方式2 brokerIP1 设置宿主机IP，不要使用docker 内部IP 要换做你自己的IP</span></span><br><span class="line"><span class="attr">brokerIP1</span>=<span class="string">192.168.1.16</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 在发送消息时，自动创建服务器不存在的topic，默认创建的队列数</span></span><br><span class="line"><span class="attr">defaultTopicQueueNums</span>=<span class="string">4</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 是否允许 Broker 自动创建 Topic，建议线下开启，线上关闭 ！！！这里仔细看是 false，false，false</span></span><br><span class="line"><span class="attr">autoCreateTopicEnable</span>=<span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateSubscriptionGroup</span>=<span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Broker 对外服务的监听端口</span></span><br><span class="line"><span class="attr">listenPort</span>=<span class="string">10911</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 删除文件时间点，默认凌晨4点</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="string">04</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 文件保留时间，默认48小时</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="string">120</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># commitLog 每个文件的大小默认1G</span></span><br><span class="line"><span class="attr">mapedFileSizeCommitLog</span>=<span class="string">1073741824</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># ConsumeQueue 每个文件默认存 30W 条，根据业务情况调整</span></span><br><span class="line"><span class="attr">mapedFileSizeConsumeQueue</span>=<span class="string">300000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># destroyMapedFileIntervalForcibly=120000</span></span><br><span class="line"><span class="comment"># redeleteHangedFileInterval=120000</span></span><br><span class="line"><span class="comment"># 检测物理文件磁盘空间</span></span><br><span class="line"><span class="attr">diskMaxUsedSpaceRatio</span>=<span class="string">88</span></span><br><span class="line"><span class="comment"># 存储路径</span></span><br><span class="line"><span class="comment"># storePathRootDir=/home/ztztdata/rocketmq-all-4.1.0-incubating/store</span></span><br><span class="line"><span class="comment"># commitLog 存储路径</span></span><br><span class="line"><span class="comment"># storePathCommitLog=/home/ztztdata/rocketmq-all-4.1.0-incubating/store/commitlog</span></span><br><span class="line"><span class="comment"># 消费队列存储</span></span><br><span class="line"><span class="comment"># storePathConsumeQueue=/home/ztztdata/rocketmq-all-4.1.0-incubating/store/consumequeue</span></span><br><span class="line"><span class="comment"># 消息索引存储路径</span></span><br><span class="line"><span class="comment"># storePathIndex=/home/ztztdata/rocketmq-all-4.1.0-incubating/store/index</span></span><br><span class="line"><span class="comment"># checkpoint 文件存储路径</span></span><br><span class="line"><span class="comment"># storeCheckpoint=/home/ztztdata/rocketmq-all-4.1.0-incubating/store/checkpoint</span></span><br><span class="line"><span class="comment"># abort 文件存储路径</span></span><br><span class="line"><span class="comment"># abortFile=/home/ztztdata/rocketmq-all-4.1.0-incubating/store/abort</span></span><br><span class="line"><span class="comment"># 限制的消息大小</span></span><br><span class="line"><span class="attr">maxMessageSize</span>=<span class="string">65536</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># flushCommitLogLeastPages=4</span></span><br><span class="line"><span class="comment"># flushConsumeQueueLeastPages=2</span></span><br><span class="line"><span class="comment"># flushCommitLogThoroughInterval=10000</span></span><br><span class="line"><span class="comment"># flushConsumeQueueThoroughInterval=60000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Broker 的角色</span></span><br><span class="line"><span class="comment"># - ASYNC_MASTER 异步复制Master</span></span><br><span class="line"><span class="comment"># - SYNC_MASTER 同步双写Master</span></span><br><span class="line"><span class="comment"># - SLAVE</span></span><br><span class="line"><span class="attr">brokerRole</span>=<span class="string">ASYNC_MASTER</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 刷盘方式</span></span><br><span class="line"><span class="comment"># - ASYNC_FLUSH 异步刷盘</span></span><br><span class="line"><span class="comment"># - SYNC_FLUSH 同步刷盘</span></span><br><span class="line"><span class="attr">flushDiskType</span>=<span class="string">ASYNC_FLUSH</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 发消息线程池数量</span></span><br><span class="line"><span class="comment"># sendMessageThreadPoolNums=128</span></span><br><span class="line"><span class="comment"># 拉消息线程池数量</span></span><br><span class="line"><span class="comment"># pullMessageThreadPoolNums=128</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br><span class="line">访问 localhost:8080</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-docker安装nginx"><a href="#4-docker安装nginx" class="headerlink" title="4. docker安装nginx"></a>4. docker安装nginx</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br><span class="line">docker run --name nginx -p 80:80 -d nginx</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/20/rocketmq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/20/rocketmq/" itemprop="url">rocketmq</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-20T15:16:38+08:00">
+                2022-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="rocketmq"><a href="#rocketmq" class="headerlink" title="rocketmq"></a>rocketmq</h1><h2 id="1-整合使用"><a href="#1-整合使用" class="headerlink" title="1.整合使用"></a>1.整合使用</h2><h3 id="1-1-依赖"><a href="#1-1-依赖" class="headerlink" title="1.1 依赖"></a>1.1 依赖</h3><h4 id="1-1-1整合spring-boot-starter"><a href="#1-1-1整合spring-boot-starter" class="headerlink" title="1.1.1整合spring-boot-starter"></a>1.1.1整合spring-boot-starter</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.rocketmq&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;rocketmq-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;!--2.1.0对应的mq是4.6.x--&gt;</span><br><span class="line">    &lt;!--2.2.0对应的mq是4.7.x--&gt;</span><br><span class="line">    &lt;version&gt;2.2.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-2整合配置rocketmq-client"><a href="#1-1-2整合配置rocketmq-client" class="headerlink" title="1.1.2整合配置rocketmq-client"></a>1.1.2整合配置rocketmq-client</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.rocketmq&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;rocketmq-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.7.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-2-application-yml配置"><a href="#1-2-application-yml配置" class="headerlink" title="1.2 application.yml配置"></a>1.2 application.yml配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rocketmq:</span></span><br><span class="line">  <span class="attr">name-server:</span> <span class="number">192.168</span><span class="number">.17</span><span class="number">.100</span><span class="string">:9876</span></span><br><span class="line">  <span class="attr">producer:</span></span><br><span class="line">    <span class="attr">group:</span> <span class="string">mysql_sync_pro_group</span></span><br><span class="line">    <span class="attr">send-message-timeout:</span> <span class="number">3000</span> <span class="comment"># 发送消息超时时间，单位：毫秒。默认为 3000 。</span></span><br><span class="line">    <span class="attr">compress-message-body-threshold:</span> <span class="number">4096</span> <span class="comment"># 消息压缩阀值，当消息体的大小超过该阀值后，进行消息压缩。默认为 4 * 1024B</span></span><br><span class="line">    <span class="attr">max-message-size:</span> <span class="number">4194304</span> <span class="comment"># 消息体的最大允许大小。。默认为 4 * 1024 * 1024B</span></span><br><span class="line">    <span class="attr">retry-times-when-send-failed:</span> <span class="number">2</span> <span class="comment"># 同步发送消息时，失败重试次数。默认为 2 次。</span></span><br><span class="line">    <span class="attr">retry-times-when-send-async-failed:</span> <span class="number">2</span> <span class="comment"># 异步发送消息时，失败重试次数。默认为 2 次。</span></span><br><span class="line">    <span class="attr">retry-next-server:</span> <span class="literal">false</span> <span class="comment"># 发送消息给 Broker 时，如果发送失败，是否重试另外一台 Broker 。默认为 false</span></span><br><span class="line">  <span class="comment">#以下是配置文件config的配置  spring-boot-starter 不需要下面的配置</span></span><br><span class="line">  <span class="attr">consumer:</span></span><br><span class="line">    <span class="attr">namesrvAddrs:</span> <span class="number">192.168</span><span class="number">.17</span><span class="number">.100</span><span class="string">:9876</span></span><br><span class="line">    <span class="attr">consumerTopic:</span> <span class="string">canal_source</span></span><br><span class="line">    <span class="attr">consumeThreadMin:</span> <span class="number">5</span></span><br><span class="line">    <span class="attr">consumeThreadMax:</span> <span class="number">10</span></span><br><span class="line">    <span class="attr">consumerGroupName:</span> <span class="string">mysql_sync_con_group</span></span><br><span class="line">    <span class="attr">consumeMessageBatchMaxSize:</span> <span class="number">1</span></span><br><span class="line">    <span class="attr">maxReconsumeTimes:</span> <span class="number">10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-Listener"><a href="#1-3-Listener" class="headerlink" title="1.3 Listener"></a>1.3 Listener</h3><h4 id="1-3-1-基于注解监听"><a href="#1-3-1-基于注解监听" class="headerlink" title="1.3.1 基于注解监听"></a>1.3.1 基于注解监听</h4><h5 id="1-3-1-1-MQlistener"><a href="#1-3-1-1-MQlistener" class="headerlink" title="1.3.1.1 MQlistener"></a>1.3.1.1 MQlistener</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.project.canal.listener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 配置RocketMQ监听</span></span><br><span class="line"><span class="comment"> * 采用 RocketMQTemplate rocketMQTemplate 基于注解的</span></span><br><span class="line"><span class="comment"> * RocketMQListener&lt;&gt;泛型必须和接收的消息类型相同</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1.topic：消息的发送者使用同一个topic</span></span><br><span class="line"><span class="comment"> * 2.group：不用和生产者group相同 ( 在RocketMQ中消费者和发送者组没有关系 )</span></span><br><span class="line"><span class="comment"> * 3.tag：设置为 * 时，表示全部。</span></span><br><span class="line"><span class="comment"> * 4.消费模式：默认 CLUSTERING （ CLUSTERING：负载均衡 ）（ BROADCASTING：广播机制 ）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RocketMQMessageListener(consumerGroup = &quot;delay_group&quot;,topic = &quot;delay_topic&quot;,selectorExpression = &quot;*&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RocketMQDelayConsumerListener</span> <span class="keyword">implements</span> <span class="title class_">RocketMQListener</span>&lt;String&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String s)</span> &#123;</span><br><span class="line"><span class="comment">//        Map&lt;String,Object&gt; orderMap = JSONObject.parseObject(s,Map.class);</span></span><br><span class="line"><span class="comment">//        String orderNumber = String.valueOf(orderMap.get(&quot;orderNumber&quot;));</span></span><br><span class="line"><span class="comment">//        String createTime = String.valueOf(orderMap.get(&quot;createTime&quot;));</span></span><br><span class="line">        <span class="comment">//根据orderNumber 查询订单状态，若为未支付，则消息订单并修改库存</span></span><br><span class="line"></span><br><span class="line">        System.out.println(s);</span><br><span class="line">        System.out.println(<span class="string">&quot;消费时间：&quot;</span>+System.currentTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-3-2基于配置文件监听"><a href="#1-3-2基于配置文件监听" class="headerlink" title="1.3.2基于配置文件监听"></a>1.3.2基于配置文件监听</h4><blockquote>
+<p>基于配置文件：要配置消费者</p>
+</blockquote>
+<h5 id="1-3-2-1-消费者配置"><a href="#1-3-2-1-消费者配置" class="headerlink" title="1.3.2.1  消费者配置"></a>1.3.2.1  消费者配置</h5><h5 id="1-3-2-2-MQConsumerPropertis"><a href="#1-3-2-2-MQConsumerPropertis" class="headerlink" title="1.3.2.2 MQConsumerPropertis"></a>1.3.2.2 MQConsumerPropertis</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.project.canal.mq;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;rocketmq.consumer&quot;)</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MQConsumerPropertis</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String namesrvAddrs;</span><br><span class="line">    <span class="keyword">private</span> String consumerTopic;</span><br><span class="line">    <span class="keyword">private</span> Integer consumeThreadMin;</span><br><span class="line">    <span class="keyword">private</span> Integer consumeThreadMax;</span><br><span class="line">    <span class="keyword">private</span> String  consumerGroupName;</span><br><span class="line">    <span class="keyword">private</span> Integer consumeMessageBatchMaxSize;</span><br><span class="line">    <span class="keyword">private</span> Integer maxReconsumeTimes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="1-3-2-3MQConsumerConfig"><a href="#1-3-2-3MQConsumerConfig" class="headerlink" title="1.3.2.3MQConsumerConfig"></a>1.3.2.3MQConsumerConfig</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.project.canal.mq;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.project.canal.listener.MysqlDestTableListener;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.exception.MQClientException;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.common.consumer.ConsumeFromWhere;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.common.protocol.heartbeat.MessageModel;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RocketMQ消费者配置</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2022/9/8 15:03</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MQConsumerConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MQConsumerPropertis mqConsumerPropertis;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(name = &quot;unReturnConsume&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> DefaultMQPushConsumer <span class="title function_">unReturnConsume</span><span class="params">(MysqlDestTableListener mysqlDestTableListener)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> createDefaultMQPushConsumer(mysqlDestTableListener, mqConsumerPropertis.getConsumerTopic(), mqConsumerPropertis.getConsumerGroupName(), mqConsumerPropertis.getMaxReconsumeTimes());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> DefaultMQPushConsumer <span class="title function_">createDefaultMQPushConsumer</span><span class="params">(MessageListenerOrderly messageListenerOrderly,</span></span><br><span class="line"><span class="params">                                                             String topic,</span></span><br><span class="line"><span class="params">                                                             String groupName, Integer maxReconsumeTimes)</span> &#123;</span><br><span class="line">        <span class="type">DefaultMQPushConsumer</span> <span class="variable">consumer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultMQPushConsumer</span>(groupName);</span><br><span class="line">        consumer.setNamesrvAddr(mqConsumerPropertis.getNamesrvAddrs());</span><br><span class="line">        consumer.setConsumeThreadMin(mqConsumerPropertis.getConsumeThreadMin());</span><br><span class="line">        consumer.setConsumeThreadMax(mqConsumerPropertis.getConsumeThreadMax());</span><br><span class="line">        consumer.registerMessageListener(messageListenerOrderly);</span><br><span class="line">        <span class="comment">//设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费</span></span><br><span class="line">        <span class="comment">// 设置为从头消费 顺序消费 顺序消费如果失败将会maxReconsumeTimes=Integer.MAX_VALUE，也就是无限次</span></span><br><span class="line">        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);</span><br><span class="line">        <span class="comment">//设置消费模型，集群还是广播，默认为集群。广播能保证至少一次消费，但是消费失败后不做重试,集群消费模式：当使用集群消费模式时，RocketMQ 认为任意一条消息只需要被消费组内的任意一个消费者处理即可。</span></span><br><span class="line">        <span class="comment">//广播消费模式：当使用广播消费模式时，RocketMQ 会将每条消息推送给消费组所有的消费者，保证消息至少被每个消费者消费一次。 消息重试只针对集群消费模式生效；广播消费模式不提供失败重试特性，即消费失败后，失败消息不再重试，继续消费新的消息</span></span><br><span class="line">        consumer.setMessageModel(MessageModel.CLUSTERING);</span><br><span class="line">        <span class="comment">//设置一次消费消息的条数，默认为1条</span></span><br><span class="line">        consumer.setConsumeMessageBatchMaxSize(mqConsumerPropertis.getConsumeMessageBatchMaxSize());</span><br><span class="line">        consumer.setInstanceName(topic);</span><br><span class="line">        <span class="keyword">if</span> (maxReconsumeTimes != <span class="literal">null</span>) &#123;</span><br><span class="line">            consumer.setMaxReconsumeTimes(maxReconsumeTimes);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            consumer.subscribe(topic, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">            consumer.start();</span><br><span class="line">            log.info(<span class="string">&quot;=====================【RocketMQ-consumer启动成功，groupName：&#123;&#125;，namesrvAddr：&#123;&#125;，topic: &#123;&#125;】======================&quot;</span>, groupName, mqConsumerPropertis.getNamesrvAddrs(), topic);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MQClientException e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;======================【RocketMQ-consumer启动失败，原因：&#123;&#125;=====================】&quot;</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> consumer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="1-3-2-4-MQListener"><a href="#1-3-2-4-MQListener" class="headerlink" title="1.3.2.4 MQListener"></a>1.3.2.4 MQListener</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.project.canal.listener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.common.message.MessageExt;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> NieZiHan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/12/21 9:42</span></span><br><span class="line"><span class="comment"> * 采用自定义的 基于配置文件的</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MysqlDestTableListener</span> <span class="keyword">implements</span> <span class="title class_">MessageListenerOrderly</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ConsumeOrderlyStatus <span class="title function_">consumeMessage</span><span class="params">(List&lt;MessageExt&gt; list, ConsumeOrderlyContext consumeOrderlyContext)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (MessageExt messageExt : list) &#123;</span><br><span class="line">                <span class="comment">//获取消息的topic</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">topic</span> <span class="operator">=</span> messageExt.getTopic();</span><br><span class="line">                <span class="comment">//获取消息的标签</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">tags</span> <span class="operator">=</span> messageExt.getTags();</span><br><span class="line">                <span class="comment">//获取消息内容</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">content</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(messageExt.getBody());</span><br><span class="line">                System.out.println(<span class="string">&quot;开始消费消息====》&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;topic&quot;</span>+topic+<span class="string">&quot;==tags&quot;</span>+tags+<span class="string">&quot;==content&quot;</span>+content);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ConsumeOrderlyStatus.SUCCESS;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception exception) &#123;</span><br><span class="line">            exception.printStackTrace();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-4调用"><a href="#1-4调用" class="headerlink" title="1.4调用"></a>1.4调用</h3><h4 id="1-4-1boot-start"><a href="#1-4-1boot-start" class="headerlink" title="1.4.1boot-start"></a>1.4.1boot-start</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> RocketMQTemplate rocketMQTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiOperation(value=&quot;发送延时消息到message&quot;)</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/sendDelayMqMessage&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendDelayMqMessage</span><span class="params">()</span> &#123;</span><br><span class="line">        SendResult result=rocketMQTemplate.syncSend(<span class="string">&quot;delay_topic&quot;</span>, MessageBuilder.withPayload(<span class="string">&quot;瓜田李下 delay&quot;</span>).build(),<span class="number">2000</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;发送时间：&quot;</span>+System.currentTimeMillis());</span><br><span class="line">        System.out.println(result);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 普通字符串消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMessage</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;普通消息&quot;</span>;</span><br><span class="line">        rocketMQTemplate.convertAndSend(<span class="string">&quot;sendMessage&quot;</span>, json);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 同步消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">syncSend</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;同步消息&quot;</span>;</span><br><span class="line">        <span class="type">SendResult</span> <span class="variable">sendMessage</span> <span class="operator">=</span> rocketMQTemplate.syncSend(<span class="string">&quot;sendMessage&quot;</span>, json);</span><br><span class="line">        System.out.println(sendMessage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 异步消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">asyncSend</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;异步消息&quot;</span>;</span><br><span class="line">        <span class="type">SendCallback</span> <span class="variable">callback</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SendCallback</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onSuccess</span><span class="params">(SendResult sendResult)</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onException</span><span class="params">(Throwable throwable)</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;456&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        rocketMQTemplate.asyncSend(<span class="string">&quot;sendMessage&quot;</span>, json, callback);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单向消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onewaySend</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;单向消息&quot;</span>;</span><br><span class="line">        rocketMQTemplate.sendOneWay(<span class="string">&quot;sendMessage&quot;</span>, json);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-4-2-client"><a href="#1-4-2-client" class="headerlink" title="1.4.2 client"></a>1.4.2 client</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> MQProducerConfig mqProducerConfig;</span><br><span class="line">   <span class="meta">@ApiOperation(value=&quot;发送普通消息到message&quot;)</span></span><br><span class="line">   <span class="meta">@GetMapping(value = &quot;/sendMqMessage&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMqMessage</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="type">DefaultMQProducer</span> <span class="variable">producer</span> <span class="operator">=</span> mqProducerConfig.thresholdProducer();</span><br><span class="line">           <span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;canal_source&quot;</span>,(<span class="string">&quot;mq发送消息&quot;</span>+ RandomUtil.randomString(<span class="number">5</span>)).getBytes());</span><br><span class="line">           message.setKeys(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">           message.setTags(<span class="string">&quot;tags1&quot;</span>);</span><br><span class="line">           <span class="type">SendResult</span> <span class="variable">sendResult</span> <span class="operator">=</span> producer.send(message);</span><br><span class="line">           System.out.println(<span class="string">&quot;sendResult&quot;</span>+ sendResult);</span><br><span class="line">           log.info(<span class="string">&quot;pro发送消息完成&quot;</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/20/canal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/20/canal/" itemprop="url">canal</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-20T10:49:12+08:00">
+                2022-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="canal"><a href="#canal" class="headerlink" title="canal"></a>canal</h1><h2 id="1-canal的搭建"><a href="#1-canal的搭建" class="headerlink" title="1.canal的搭建"></a>1.canal的搭建</h2><h3 id="1-开启binlog日志"><a href="#1-开启binlog日志" class="headerlink" title="1.开启binlog日志"></a>1.开启binlog日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 查看是否开启</span><br><span class="line">SHOW VARIABLES LIKE &#x27;log_bin&#x27;;</span><br><span class="line">show global variables like &quot;binlog%&quot;;</span><br><span class="line"></span><br><span class="line">#没开启:</span><br><span class="line">#第一种方式: 在mysqld下添加第一种方式</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin=ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename=/var/lib/mysql/mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index=/var/lib/mysql/mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line">#第二种方式: 在mysqld下添加第二种方式</span><br><span class="line">#此一行等同于上面log_bin三行,这里可以写绝对路径,也可以直接写mysql-bin(后者默认就是在/var/lib/mysql目录下)</span><br><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line">配置完后重启MySQL，再次查看是否开启binlog</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-创建一个用户"><a href="#2-创建一个用户" class="headerlink" title="2.创建一个用户"></a>2.创建一个用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- 创建用户 用户名：canal 密码：canal</span><br><span class="line">create user &#x27;canal&#x27;@&#x27;%&#x27; identified by &#x27;canal&#x27;;</span><br><span class="line">-- 授权 *.*表示所有库</span><br><span class="line">grant SELECT, REPLICATION SLAVE, REPLICATION CLIENT on *.* to &#x27;canal&#x27;@&#x27;%&#x27; with grant option;</span><br><span class="line">-- 刷新</span><br><span class="line">flush privileges; </span><br><span class="line"></span><br><span class="line">-- 查看用户及权限</span><br><span class="line">SELECT DISTINCT CONCAT(&#x27;User: &#x27;&#x27;&#x27;,user,&#x27;&#x27;&#x27;@&#x27;&#x27;&#x27;,host,&#x27;&#x27;&#x27;;&#x27;) AS query FROM mysql.user;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-canal下载"><a href="#3-canal下载" class="headerlink" title="3.canal下载"></a>3.canal下载</h3><blockquote>
+<p> Linux 中  <a target="_blank" rel="noopener" href="https://github.com/alibaba/canal/releases">https://github.com/alibaba/canal/releases</a></p>
+</blockquote>
+<p>3.1 安装jdk</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf jdk-8u60-linux-x64.tar.gz -C /usr/lib/jvm</span><br><span class="line"></span><br><span class="line">cd /etc/</span><br><span class="line">cp profile profile.bak</span><br><span class="line">vim  profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在结尾添加</span></span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者</span></span><br><span class="line">JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JAVA_HOME  PATH  CLASSPATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新加载系统配置文件</span></span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line">java -version</span><br><span class="line">java</span><br><span class="line">javac</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/stream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/09/stream/" itemprop="url">Stream</a></h1>
         
 
         <div class="post-meta">
@@ -519,7 +997,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/java%20base/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -538,7 +1016,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/12/09/java%20base/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url">多线程</a></h1>
+                <a class="post-title-link" href="/2022/12/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url">多线程</a></h1>
         
 
         <div class="post-meta">
@@ -1448,7 +1926,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/configure/Sharding-jdbc/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/Sharding-jdbc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1467,7 +1945,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/12/09/configure/Sharding-jdbc/" itemprop="url">Sharding-jdbc</a></h1>
+                <a class="post-title-link" href="/2022/12/09/Sharding-jdbc/" itemprop="url">Sharding-jdbc</a></h1>
         
 
         <div class="post-meta">
@@ -1639,7 +2117,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/util/arthas/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/09/arthas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1658,7 +2136,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/12/09/util/arthas/" itemprop="url">arthas</a></h1>
+                <a class="post-title-link" href="/2022/12/09/arthas/" itemprop="url">arthas</a></h1>
         
 
         <div class="post-meta">
@@ -1889,6 +2367,10 @@
 
 
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">关闭本地 hexo</span><br><span class="line">taskkill /F /IM node.exe  </span><br><span class="line"></span><br><span class="line">taskkill /F /pid 4000</span><br></pre></td></tr></table></figure>
+
+
+
 
           
         
@@ -1970,7 +2452,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1981,7 +2463,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1992,7 +2474,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
