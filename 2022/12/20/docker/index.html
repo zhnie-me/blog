@@ -87,7 +87,7 @@
 <meta property="og:description" content="docker1.普通安装jdk1234567891011121314151617181920212223tar -xvf jdk-8u60-linux-x64.tar.gz -C &#x2F;usr&#x2F;lib&#x2F;jvmcd &#x2F;etc&#x2F;cp profile profile.bakvim  profile#在结尾添加export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_60export PA">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-12-20T07:16:38.000Z">
-<meta property="article:modified_time" content="2022-12-21T07:20:47.879Z">
+<meta property="article:modified_time" content="2023-01-07T10:42:32.379Z">
 <meta property="article:author" content="zhnie">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -403,6 +403,36 @@
 <h2 id="4-docker安装nginx"><a href="#4-docker安装nginx" class="headerlink" title="4. docker安装nginx"></a>4. docker安装nginx</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br><span class="line">docker run --name nginx -p 80:80 -d nginx</span><br></pre></td></tr></table></figure>
 
 
+
+<h2 id="5-docker部署minio"><a href="#5-docker部署minio" class="headerlink" title="5.docker部署minio"></a>5.docker部署minio</h2><h3 id="5-1拉取镜像"><a href="#5-1拉取镜像" class="headerlink" title="5.1拉取镜像"></a>5.1拉取镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull minio/minio</span><br><span class="line"></span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-创建目录"><a href="#5-2-创建目录" class="headerlink" title="5.2.创建目录"></a>5.2.创建目录</h3><blockquote>
+<p>一个用来存放配置，一个用来存储上传文件的目录</p>
+<p>启动前需要先创建Minio外部挂载的配置文件（ &#x2F;home&#x2F;minio&#x2F;config）,</p>
+<p>和存储上传文件的目录（ &#x2F;home&#x2F;minio&#x2F;data）</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /home/minio/config</span><br><span class="line">mkdir -p /home/minio/data</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3启动"><a href="#5-3启动" class="headerlink" title="5.3启动"></a>5.3启动</h3><p>单行代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9000:9000 -p 9090:9090      --net=host      --name minio      -d --restart=always      -e &quot;MINIO_ACCESS_KEY=minioadmin&quot;      -e &quot;MINIO_SECRET_KEY=minioadmin&quot;      -v /home/minio/data:/data      -v /home/minio/config:/root/.minio      minio/minio server      /data --console-address &quot;:9090&quot; -address &quot;:9000&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多行代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9000:9000 -p 9090:9090 \</span><br><span class="line">     --net=host \</span><br><span class="line">     --name minio \</span><br><span class="line">     -d --restart=always \</span><br><span class="line">     -e &quot;MINIO_ACCESS_KEY=minioadmin&quot; \</span><br><span class="line">     -e &quot;MINIO_SECRET_KEY=minioadmin&quot; \</span><br><span class="line">     -v /home/minio/data:/data \</span><br><span class="line">     -v /home/minio/config:/root/.minio \</span><br><span class="line">     minio/minio server \</span><br><span class="line">     /data --console-address &quot;:9090&quot; -address &quot;:9000&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>9090端口指的是minio的客户端端口 9000是真实的api端口</strong></p>
+<p>MINIO_ACCESS_KEY ：账号</p>
+<p>MINIO_SECRET_KEY ：密码（账号长度必须大于等于5，密码长度必须大于等于8位）</p>
+</blockquote>
+<h3 id="6-4创建用户"><a href="#6-4创建用户" class="headerlink" title="6.4创建用户"></a>6.4创建用户</h3><blockquote>
+<p>admin admin123456</p>
+</blockquote>
+<blockquote>
+<p> Service Account  </p>
+<p>[{“access_key”:”ZBT79S0EA7P41R77GEY1”,”secret_key”:”GdsL5YzILY2glg4L2ez1eY4kVVLXeX2+L5IRryEL”}]}</p>
+<p>key  12345678</p>
+</blockquote>
+
       
     </div>
     
@@ -441,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/01/07/minio/" rel="prev" title="minio">
+                minio <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -517,7 +551,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -539,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -572,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker"><span class="nav-number">1.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%99%AE%E9%80%9A%E5%AE%89%E8%A3%85jdk"><span class="nav-number">1.1.</span> <span class="nav-text">1.普通安装jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85docker-compose"><span class="nav-number">1.2.</span> <span class="nav-text">2.安装docker-compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-docker%E5%AE%89%E8%A3%85rocketmq"><span class="nav-number">1.3.</span> <span class="nav-text">3.docker安装rocketmq</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-docker-compose-yml"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 docker-compose.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-broker-conf"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 broker.conf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-docker%E5%AE%89%E8%A3%85nginx"><span class="nav-number">1.4.</span> <span class="nav-text">4. docker安装nginx</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker"><span class="nav-number">1.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%99%AE%E9%80%9A%E5%AE%89%E8%A3%85jdk"><span class="nav-number">1.1.</span> <span class="nav-text">1.普通安装jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85docker-compose"><span class="nav-number">1.2.</span> <span class="nav-text">2.安装docker-compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-docker%E5%AE%89%E8%A3%85rocketmq"><span class="nav-number">1.3.</span> <span class="nav-text">3.docker安装rocketmq</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-docker-compose-yml"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 docker-compose.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-broker-conf"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 broker.conf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-docker%E5%AE%89%E8%A3%85nginx"><span class="nav-number">1.4.</span> <span class="nav-text">4. docker安装nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-docker%E9%83%A8%E7%BD%B2minio"><span class="nav-number">1.5.</span> <span class="nav-text">5.docker部署minio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2.创建目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3%E5%90%AF%E5%8A%A8"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">1.5.4.</span> <span class="nav-text">6.4创建用户</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -592,7 +626,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
