@@ -87,7 +87,7 @@
 <meta property="og:description" content="minio1.docker部署minio1.1拉取镜像 123docker pull minio&#x2F;miniodocker images      1.2.创建目录  一个用来存放配置，一个用来存储上传文件的目录 启动前需要先创建Minio外部挂载的配置文件（ &#x2F;home&#x2F;minio&#x2F;config）, 和存储上传文件的目录（ &#x2F;home&#x2F;minio&amp;">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-01-07T07:16:38.000Z">
-<meta property="article:modified_time" content="2023-01-07T10:38:25.203Z">
+<meta property="article:modified_time" content="2023-01-07T10:52:25.113Z">
 <meta property="article:author" content="zhnie">
 <meta property="article:tag" content="minio">
 <meta name="twitter:card" content="summary">
@@ -411,8 +411,8 @@
 </blockquote>
 <blockquote>
 <p> Service Account  </p>
-<p>[{“access_key”:”ZBT79S0EA7P41R77GEY1”,”secret_key”:”GdsL5YzILY2glg4L2ez1eY4kVVLXeX2+L5IRryEL”}]}</p>
-<p>key  12345678</p>
+<p> [{“access_key”:”ZBT79S0EA7P41R77GEY1”,”secret_key”:”GdsL5YzILY2glg4L2ez1eY4kVVLXeX2+L5IRryEL”}]}</p>
+<p> key  12345678</p>
 </blockquote>
 <h2 id="2-springboot整合"><a href="#2-springboot整合" class="headerlink" title="2.springboot整合"></a>2.springboot整合</h2><h3 id="1-pom"><a href="#1-pom" class="headerlink" title="1.pom"></a>1.pom</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;dependency&gt;</span></span><br><span class="line">            <span class="string">&lt;groupId&gt;io.minio&lt;/groupId&gt;</span></span><br><span class="line">            <span class="string">&lt;artifactId&gt;minio&lt;/artifactId&gt;</span></span><br><span class="line">            <span class="string">&lt;version&gt;7.0.2&lt;/version&gt;</span></span><br><span class="line">        <span class="string">&lt;/dependency&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="string">&lt;dependency&gt;</span></span><br><span class="line">            <span class="string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">            <span class="string">&lt;artifactId&gt;spring-boot-test&lt;/artifactId&gt;</span></span><br><span class="line">            <span class="string">&lt;version&gt;2.3.2.RELEASE&lt;/version&gt;</span></span><br><span class="line">        <span class="string">&lt;/dependency&gt;</span></span><br><span class="line">        <span class="string">&lt;dependency&gt;</span></span><br><span class="line">            <span class="string">&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span></span><br><span class="line">            <span class="string">&lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span></span><br><span class="line">            <span class="string">&lt;version&gt;2.8.0&lt;/version&gt;</span></span><br><span class="line">        <span class="string">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure>
 
