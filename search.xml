@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>canal</title>
+    <url>/2022/12/20/canal/</url>
+    <content><![CDATA[<h1 id="canal"><a href="#canal" class="headerlink" title="canal"></a>canal</h1><h2 id="1-canal的搭建"><a href="#1-canal的搭建" class="headerlink" title="1.canal的搭建"></a>1.canal的搭建</h2><h3 id="1-开启binlog日志"><a href="#1-开启binlog日志" class="headerlink" title="1.开启binlog日志"></a>1.开启binlog日志</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查看是否开启</span><br><span class="line">SHOW VARIABLES LIKE &#x27;log_bin&#x27;;</span><br><span class="line">show global variables like &quot;binlog%&quot;;</span><br><span class="line"></span><br><span class="line">#没开启:</span><br><span class="line">#第一种方式: 在mysqld下添加第一种方式</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin=ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename=/var/lib/mysql/mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index=/var/lib/mysql/mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line">#第二种方式: 在mysqld下添加第二种方式</span><br><span class="line">#此一行等同于上面log_bin三行,这里可以写绝对路径,也可以直接写mysql-bin(后者默认就是在/var/lib/mysql目录下)</span><br><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line">配置完后重启MySQL，再次查看是否开启binlog</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-创建一个用户"><a href="#2-创建一个用户" class="headerlink" title="2.创建一个用户"></a>2.创建一个用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 创建用户 用户名：canal 密码：canal</span><br><span class="line">create user &#x27;canal&#x27;@&#x27;%&#x27; identified by &#x27;canal&#x27;;</span><br><span class="line">-- 授权 *.*表示所有库</span><br><span class="line">grant SELECT, REPLICATION SLAVE, REPLICATION CLIENT on *.* to &#x27;canal&#x27;@&#x27;%&#x27; with grant option;</span><br><span class="line">-- 刷新</span><br><span class="line">flush privileges; </span><br><span class="line"></span><br><span class="line">-- 查看用户及权限</span><br><span class="line">SELECT DISTINCT CONCAT(&#x27;User: &#x27;&#x27;&#x27;,user,&#x27;&#x27;&#x27;@&#x27;&#x27;&#x27;,host,&#x27;&#x27;&#x27;;&#x27;) AS query FROM mysql.user;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-canal下载"><a href="#3-canal下载" class="headerlink" title="3.canal下载"></a>3.canal下载</h3><blockquote>
+<p> Linux 中  <a href="https://github.com/alibaba/canal/releases">https://github.com/alibaba/canal/releases</a></p>
+</blockquote>
+<p>3.1 安装jdk</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -xvf jdk-8u60-linux-x64.tar.gz -C /usr/lib/jvm</span><br><span class="line"></span><br><span class="line">cd /etc/</span><br><span class="line">cp profile profile.bak</span><br><span class="line">vim  profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在结尾添加</span></span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者</span></span><br><span class="line">JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JAVA_HOME  PATH  CLASSPATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新加载系统配置文件</span></span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line">java -version</span><br><span class="line">java</span><br><span class="line">javac</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>canal</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Sharding-jdbc</title>
     <url>/2022/12/09/Sharding-jdbc/</url>
     <content><![CDATA[<h1 id="Sharding-jdbc"><a href="#Sharding-jdbc" class="headerlink" title="Sharding-jdbc"></a>Sharding-jdbc</h1><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><p>垂直分库：多个库，分别查不同表； ds0.t_order，ds1.t_user</p>
@@ -166,30 +190,6 @@
       </tags>
   </entry>
   <entry>
-    <title>canal</title>
-    <url>/2022/12/20/canal/</url>
-    <content><![CDATA[<h1 id="canal"><a href="#canal" class="headerlink" title="canal"></a>canal</h1><h2 id="1-canal的搭建"><a href="#1-canal的搭建" class="headerlink" title="1.canal的搭建"></a>1.canal的搭建</h2><h3 id="1-开启binlog日志"><a href="#1-开启binlog日志" class="headerlink" title="1.开启binlog日志"></a>1.开启binlog日志</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查看是否开启</span><br><span class="line">SHOW VARIABLES LIKE &#x27;log_bin&#x27;;</span><br><span class="line">show global variables like &quot;binlog%&quot;;</span><br><span class="line"></span><br><span class="line">#没开启:</span><br><span class="line">#第一种方式: 在mysqld下添加第一种方式</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin=ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename=/var/lib/mysql/mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index=/var/lib/mysql/mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line">#第二种方式: 在mysqld下添加第二种方式</span><br><span class="line">#此一行等同于上面log_bin三行,这里可以写绝对路径,也可以直接写mysql-bin(后者默认就是在/var/lib/mysql目录下)</span><br><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line">配置完后重启MySQL，再次查看是否开启binlog</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-创建一个用户"><a href="#2-创建一个用户" class="headerlink" title="2.创建一个用户"></a>2.创建一个用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 创建用户 用户名：canal 密码：canal</span><br><span class="line">create user &#x27;canal&#x27;@&#x27;%&#x27; identified by &#x27;canal&#x27;;</span><br><span class="line">-- 授权 *.*表示所有库</span><br><span class="line">grant SELECT, REPLICATION SLAVE, REPLICATION CLIENT on *.* to &#x27;canal&#x27;@&#x27;%&#x27; with grant option;</span><br><span class="line">-- 刷新</span><br><span class="line">flush privileges; </span><br><span class="line"></span><br><span class="line">-- 查看用户及权限</span><br><span class="line">SELECT DISTINCT CONCAT(&#x27;User: &#x27;&#x27;&#x27;,user,&#x27;&#x27;&#x27;@&#x27;&#x27;&#x27;,host,&#x27;&#x27;&#x27;;&#x27;) AS query FROM mysql.user;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-canal下载"><a href="#3-canal下载" class="headerlink" title="3.canal下载"></a>3.canal下载</h3><blockquote>
-<p> Linux 中  <a href="https://github.com/alibaba/canal/releases">https://github.com/alibaba/canal/releases</a></p>
-</blockquote>
-<p>3.1 安装jdk</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -xvf jdk-8u60-linux-x64.tar.gz -C /usr/lib/jvm</span><br><span class="line"></span><br><span class="line">cd /etc/</span><br><span class="line">cp profile profile.bak</span><br><span class="line">vim  profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在结尾添加</span></span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者</span></span><br><span class="line">JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JAVA_HOME  PATH  CLASSPATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新加载系统配置文件</span></span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line">java -version</span><br><span class="line">java</span><br><span class="line">javac</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <tags>
-        <tag>canal</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>redis</title>
     <url>/2023/01/15/redis/</url>
     <content><![CDATA[<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><h2 id="1-排行榜-zset"><a href="#1-排行榜-zset" class="headerlink" title="1.排行榜 (zset)"></a>1.排行榜 (zset)</h2><blockquote>
@@ -217,32 +217,6 @@
       <tags>
         <tag>redis</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>start Hexo</title>
-    <url>/2022/12/09/startHexo/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /study</span><br><span class="line">hexo new <span class="string">&quot;fileName&quot;</span></span><br><span class="line">hexo s 本地查看</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">关闭本地 hexo</span><br><span class="line">taskkill /F /IM node.exe  </span><br><span class="line"></span><br><span class="line">taskkill /F /pid 4000</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
   </entry>
   <entry>
     <title>minio</title>
@@ -370,6 +344,32 @@
       <tags>
         <tag>rocketmq</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>start Hexo</title>
+    <url>/2022/12/09/startHexo/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /study</span><br><span class="line">hexo new <span class="string">&quot;fileName&quot;</span></span><br><span class="line">hexo s 本地查看</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">关闭本地 hexo</span><br><span class="line">taskkill /F /IM node.exe  </span><br><span class="line"></span><br><span class="line">taskkill /F /pid 4000</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
   </entry>
   <entry>
     <title>Stream</title>
@@ -1408,9 +1408,82 @@
   <entry>
     <title>mysql</title>
     <url>/2023/02/11/mysql/mysql/</url>
-    <content><![CDATA[<h1 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h1><h2 id="一、基础架构"><a href="#一、基础架构" class="headerlink" title="一、基础架构"></a>一、基础架构</h2><h3 id="1-一条SQL查询语句是如何执行"><a href="#1-一条SQL查询语句是如何执行" class="headerlink" title="1.一条SQL查询语句是如何执行"></a>1.一条SQL查询语句是如何执行</h3><h4 id="1-1-sql组件"><a href="#1-1-sql组件" class="headerlink" title="1.1 sql组件"></a>1.1 sql组件</h4><p><img src="/pic/mysql/sql%E7%BB%84%E4%BB%B6.webp" alt="sql组件"></p>
-<p>1.2<img src="/pic/mysql/test.png" alt="test"></p>
-<p><img src="/pic/aaa.png" alt="aaa"></p>
+    <content><![CDATA[<h1 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h1><h2 id="1-架构"><a href="#1-架构" class="headerlink" title="1.架构"></a>1.架构</h2><h3 id="1-1-sql组件"><a href="#1-1-sql组件" class="headerlink" title="1.1 sql组件"></a>1.1 sql组件</h3><p><img src="/pic/mysql/sql%E7%BB%84%E4%BB%B6.webp" alt="sql组件"></p>
+<blockquote>
+<ol>
+<li>连接器： 先连接到这个数据库上，这时候接待你的就是连接器。连接器负责跟客户端建立连接、获取权限、维持和管理连接 mysql -h$ip -P$port -u$user -p</li>
+<li>查询缓存：MySQL拿到一个查询请求后，会先到查询缓存看看，之前是不是执行过这条语句。之前执行过的语句及其结果可能会以key-value对的形式，被直接缓存在内存中。 select SQL_CACHE * from T where ID&#x3D;10；（mysql 8.0把这个功能删除了）</li>
+<li>分析器：开始真正执行语句，对SQL语句做解析。</li>
+<li>优化器：优化器是在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序</li>
+<li>执行器：开始执行的时候，要先判断一下你对这个表T有没有执行查询的权限，执行器就会根据表的引擎</li>
+</ol>
+</blockquote>
+<h3 id="1-2-日志"><a href="#1-2-日志" class="headerlink" title="1.2 日志"></a>1.2 日志</h3><h4 id="1-2-1-redo-log（重做日志）"><a href="#1-2-1-redo-log（重做日志）" class="headerlink" title="1.2.1  redo log（重做日志）"></a>1.2.1  redo log（重做日志）</h4><p>innodb引擎 特有的日志</p>
+<blockquote>
+<p>InnoDB的redo log 是固定大小，可以进行存储日志。在做操作时，可以先更新日志、跟新内存。在进行磁盘io的时候可以放在系统空闲的时候进行。如果满了，只能循环到文件开始的时候清除一部分数据，再写入。</p>
+<p>有了redo log，InnoDB就可以保证即使数据库发生异常重启，之前提交的记录都不会丢失，这个能力称为<strong>crash-safe</strong>。（在数据库恢复后，就可以根据redo log 恢复数据）</p>
+</blockquote>
+<h4 id="1-2-2-binlog（归档日志）"><a href="#1-2-2-binlog（归档日志）" class="headerlink" title="1.2.2  binlog（归档日志）"></a>1.2.2  binlog（归档日志）</h4><p>Server层也有自己的日志，称为binlog</p>
+<p>因为最开始MySQL里并没有InnoDB引擎。MySQL自带的引擎是MyISAM，但是MyISAM没有crash-safe的能力，binlog日志只能用于归档。而InnoDB是另一个公司以插件形式引入MySQL的，既然只依靠binlog是没有crash-safe能力的，所以InnoDB使用另外一套日志系统——也就是redo log来实现crash-safe能力。</p>
+<p> 不同点：</p>
+<blockquote>
+<ol>
+<li>redo log是InnoDB引擎特有的；binlog是MySQL的Server层实现的，所有引擎都可以使用。</li>
+<li>redo log是物理日志，记录的是“做了什么改动”；binlog是逻辑日志，记录的是这个语句的原始逻辑，statement 格式的话是记sql语句， row格式会记录行的内容，记两条，更新前和更新后都有</li>
+<li>redo log是循环写的，空间固定会用完；binlog是可以追加写入的。“追加写”是指binlog文件写到一定大小后会切换到下一个，并不会覆盖以前的日志。</li>
+</ol>
+</blockquote>
+<p>执行流程：</p>
+<p>id为主键</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> T <span class="keyword">set</span> c<span class="operator">=</span>c<span class="operator">+</span><span class="number">1</span> <span class="keyword">where</span> ID<span class="operator">=</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/pic/mysql/%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.webp" alt="执行流程"></p>
+<p>将redo log的写入拆成了两个步骤：prepare和commit，这就是”两阶段提交”</p>
+<h4 id="1-2-3-两阶段提交"><a href="#1-2-3-两阶段提交" class="headerlink" title="1.2.3 两阶段提交"></a>1.2.3 两阶段提交</h4><p><strong>A.怎样让数据库恢复到半个月内任意一秒的状态？</strong></p>
+<blockquote>
+<p>前面我们说过了，binlog会记录所有的逻辑操作，并且是采用“追加写”的形式。如果你的DBA承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有binlog，同时系统会定期做整库备份。这里的“定期”取决于系统的重要性，可以是一天一备，也可以是一周一备。</p>
+<p>当需要恢复到指定的某一秒时，比如某天下午两点发现中午十二点有一次误删表，需要找回数据，那你可以这么做：</p>
+<ul>
+<li>首先，找到最近的一次全量备份，如果你运气好，可能就是昨天晚上的一个备份，从这个备份恢复到临时库；</li>
+<li>然后，从备份的时间点开始，将备份的binlog依次取出来，重放到中午误删表之前的那个时刻。</li>
+</ul>
+<p>这样你的临时库就跟误删之前的线上库一样了，然后你可以把表数据从临时库取出来，按需要恢复到线上库去。</p>
+</blockquote>
+<p><strong>B.如果不采用两阶段提交</strong></p>
+<blockquote>
+<ol>
+<li><strong>先写redo log后写binlog</strong>。假设在redo log写完，binlog还没有写完的时候，MySQL进程异常重启。由于我们前面说过的，redo log写完之后，系统即使崩溃，仍然能够把数据恢复回来，所以恢复后这一行c的值是1。<br>  但是由于binlog没写完就crash了，这时候binlog里面就没有记录这个语句。因此，之后备份日志的时候，存起来的binlog里面就没有这条语句。<br>  然后你会发现，如果需要用这个binlog来恢复临时库的话，由于这个语句的binlog丢失，这个临时库就会少了这一次更新，恢复出来的这一行c的值就是0，与原库的值不同。</li>
+<li><strong>先写binlog后写redo log</strong>。如果在binlog写完之后crash，由于redo log还没写，崩溃恢复以后这个事务无效，所以这一行c的值是0。但是binlog里面已经记录了“把c从0改成1”这个日志。所以，在之后用binlog来恢复的时候就多了一个事务出来，恢复出来的这一行c的值就是1，与原库的值不同。</li>
+</ol>
+</blockquote>
+<p>需要再多搭建一些备库来增加系统的读能力的时候，现在常见的做法也是用全量备份加上应用binlog来实现的</p>
+<h3 id="1-3事务隔离"><a href="#1-3事务隔离" class="headerlink" title="1.3事务隔离"></a>1.3事务隔离</h3><h4 id="1-3-1隔离性与隔离级别"><a href="#1-3-1隔离性与隔离级别" class="headerlink" title="1.3.1隔离性与隔离级别"></a>1.3.1隔离性与隔离级别</h4><p>SQL标准的事务隔离级别包括：读未提交（read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（serializable ）</p>
+<p>show variables 查看隔离级别 transaction-isolation</p>
+<blockquote>
+<ul>
+<li>读未提交是指，一个事务还没提交时，它做的变更就能被别的事务看到。</li>
+<li>读提交是指，一个事务提交之后，它做的变更才会被其他事务看到。</li>
+<li>可重复读是指，一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的。</li>
+<li>串行化，顾名思义是对于同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行。</li>
+</ul>
+</blockquote>
+<h4 id="1-3-2-可重复读的实现"><a href="#1-3-2-可重复读的实现" class="headerlink" title="1.3.2 可重复读的实现"></a>1.3.2 可重复读的实现</h4><p>假设一个值从1被按顺序改成了2、3、4，在回滚日志里面就会有类似下面的记录。</p>
+<p><img src="/pic/mysql/%E4%BA%8B%E5%8A%A1.webp" alt="事务"></p>
+<p>当前值是4，但是在查询这条记录的时候，不同时刻启动的事务会有不同的read-view。如图中看到的，在视图A、B、C里面，这一个记录的值分别是1、2、4，同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。对于read-view A，要得到1，就必须将当前值依次执行图中所有的回滚操作得到。</p>
+<p>同时你会发现，即使现在有另外一个事务正在将4改成5，这个事务跟read-view A、B、C对应的事务是不会冲突的。</p>
+<p>你一定会问，回滚日志总不能一直保留吧，什么时候删除呢？答案是，在不需要的时候才删除。也就是说，系统会判断，当没有事务再需要用到这些回滚日志时，回滚日志会被删除。</p>
+<p>什么时候才不需要了呢？就是当系统里没有比这个回滚日志更早的read-view的时候</p>
+<h4 id="1-3-3-长事务"><a href="#1-3-3-长事务" class="headerlink" title="1.3.3 长事务"></a>1.3.3 长事务</h4><p>为什么尽量不要使用长事务。长事务意味着系统里面会存在很老的事务视图，在这个事务提交之前，回滚记录都要保留，这会导致大量占用存储空间。除此之外，长事务还占用锁资源，可能会拖垮库。</p>
+<h3 id="1-4索引"><a href="#1-4索引" class="headerlink" title="1.4索引"></a>1.4索引</h3><h4 id="1-4-1-索引模型"><a href="#1-4-1-索引模型" class="headerlink" title="1.4.1 索引模型"></a>1.4.1 索引模型</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">create</span> <span class="keyword">table</span> T(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">primary</span> key, </span><br><span class="line">k <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>, </span><br><span class="line">name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">index (k))engine<span class="operator">=</span>InnoDB;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>如果语句是select * from T where ID&#x3D;500，即主键查询方式，则只需要搜索ID这棵B+树；</li>
+<li>如果语句是select * from T where k&#x3D;5，即普通索引查询方式，则需要先搜索k索引树，得到ID的值为500，再到ID索引树搜索一次。这个过程称为回表。</li>
+</ul>
+</blockquote>
+<h4 id="1-4-2-索引维护"><a href="#1-4-2-索引维护" class="headerlink" title="1.4.2 索引维护"></a>1.4.2 索引维护</h4><p>页分裂 ：当一个页的数据满了，再添加数据的时候恰好在这个页中间，需要分页。</p>
+<p>所以一般需要使用自增主键</p>
 ]]></content>
       <categories>
         <category>sql</category>
