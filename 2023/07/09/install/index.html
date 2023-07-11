@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="安装软件1、docker离线安装">
+<meta name="description" content="安装软件1、安装yum12345678910111213cd &#x2F;opt&#x2F;tool# 下载压缩包wget http:&#x2F;&#x2F;yum.baseurl.org&#x2F;download&#x2F;3.2&#x2F;yum-3.2.28.tar.gz# 手动创建文件、不然报错touch &#x2F;etc&#x2F;yum.conf# 解压，centos自带tar -xvf yum-3.2.28.tar.gzcd yum-3.2.28&#x2F;# 正式安装.&#x2F;yu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装软件">
 <meta property="og:url" content="http://example.com/2023/07/09/install/index.html">
 <meta property="og:site_name" content="note">
-<meta property="og:description" content="安装软件1、docker离线安装">
+<meta property="og:description" content="安装软件1、安装yum12345678910111213cd &#x2F;opt&#x2F;tool# 下载压缩包wget http:&#x2F;&#x2F;yum.baseurl.org&#x2F;download&#x2F;3.2&#x2F;yum-3.2.28.tar.gz# 手动创建文件、不然报错touch &#x2F;etc&#x2F;yum.conf# 解压，centos自带tar -xvf yum-3.2.28.tar.gzcd yum-3.2.28&#x2F;# 正式安装.&#x2F;yu">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-09T07:16:38.000Z">
-<meta property="article:modified_time" content="2023-07-10T05:59:29.343Z">
+<meta property="article:modified_time" content="2023-07-10T10:24:46.932Z">
 <meta property="article:author" content="zhnie">
 <meta property="article:tag" content="install">
 <meta name="twitter:card" content="summary">
@@ -376,8 +376,31 @@
       
 
       
-        <h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><h3 id="1、docker离线安装"><a href="#1、docker离线安装" class="headerlink" title="1、docker离线安装"></a>1、docker离线安装</h3><blockquote>
+        <h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><h3 id="1、安装yum"><a href="#1、安装yum" class="headerlink" title="1、安装yum"></a>1、安装yum</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/tool</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载压缩包</span></span><br><span class="line">wget http://yum.baseurl.org/download/3.2/yum-3.2.28.tar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">手动创建文件、不然报错</span></span><br><span class="line">touch /etc/yum.conf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压，centos自带</span></span><br><span class="line">tar -xvf yum-3.2.28.tar.gz</span><br><span class="line"></span><br><span class="line">cd yum-3.2.28/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">正式安装</span></span><br><span class="line">./yummain.py install yum</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">看看有无提示</span></span><br><span class="line">yum help</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2、docker离线安装"><a href="#2、docker离线安装" class="headerlink" title="2、docker离线安装"></a>2、docker离线安装</h3><h4 id="2-1-下载docker离线安装包"><a href="#2-1-下载docker离线安装包" class="headerlink" title="2.1 下载docker离线安装包"></a>2.1 下载docker离线安装包</h4><blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1GLXoyQ9ZrFpiq-iAzqdg6A">https://pan.baidu.com/s/1GLXoyQ9ZrFpiq-iAzqdg6A</a><br>　　　　提取码：nf7s</p>
 </blockquote>
+<h4 id="2-2-安装"><a href="#2-2-安装" class="headerlink" title="2.2 安装"></a>2.2 安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、解压</span></span><br><span class="line">　tar -xvf docker-18.06.1-ce.tgz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、将解压出来的docker文件内容移动到 /usr/bin/ 目录下</span></span><br><span class="line">　cp docker/* /usr/bin/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、将docker注册为service</span></span><br><span class="line">　vim /etc/systemd/system/docker.service</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4.将下列配置加到docker.service中并保存</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=https://docs.docker.com</span><br><span class="line">After=network-online.target firewalld.service</span><br><span class="line">Wants=network-online.target</span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line"># the default is not to use systemd for cgroups because the delegate issues still</span><br><span class="line"># exists and systemd currently does not support the cgroup feature set required</span><br><span class="line"># for containers run by docker</span><br><span class="line">ExecStart=/usr/bin/dockerd</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line"># Having non-zero Limit*s causes performance problems due to accounting overhead</span><br><span class="line"># in the kernel. We recommend using cgroups to do container-local accounting.</span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"># Uncomment TasksMax if your systemd version supports it.</span><br><span class="line"># Only systemd 226 and above support this version.</span><br><span class="line">#TasksMax=infinity</span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"># set delegate yes so that systemd does not reset the cgroups of docker containers</span><br><span class="line">Delegate=yes</span><br><span class="line"># kill only the docker process, not all processes in the cgroup</span><br><span class="line">KillMode=process</span><br><span class="line"># restart the docker process if it exits prematurely</span><br><span class="line">Restart=onfailure</span><br><span class="line">StartLimitBurst=3</span><br><span class="line">StartLimitInterval=60s</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-3-启动"><a href="#2-3-启动" class="headerlink" title="2.3 启动"></a>2.3 启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /etc/systemd/system/docker.service             #添加文件权限并启动docker</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload                                              #重载unit配置文件</span><br><span class="line"></span><br><span class="line">systemctl enable docker.service               　　　　　　# 生成自启动服务</span><br><span class="line"></span><br><span class="line">systemctl start docker                                                    #启动Docker</span><br><span class="line"></span><br><span class="line">systemctl enable docker 　　　　　　　　　　　　　# 设置开机自启动服务</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-、安装docker-compose"><a href="#3-、安装docker-compose" class="headerlink" title="3 、安装docker-compose"></a>3 、安装docker-compose</h3><h4 id="3-1-下载docker-compose"><a href="#3-1-下载docker-compose" class="headerlink" title="3.1 下载docker-compose"></a>3.1 下载docker-compose</h4><p>​	docker-compose-Linux-x86_64 </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/docker/compose/releases">https://github.com/docker/compose/releases</a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MMob-u3jsR5OK8u4r1uZDA">https://pan.baidu.com/s/1MMob-u3jsR5OK8u4r1uZDA</a>  提取码：2336 </p>
+</blockquote>
+<p>　　　　</p>
+<h4 id="3-2-安装"><a href="#3-2-安装" class="headerlink" title="3.2  安装"></a>3.2  安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. cd  /usr/local/bin </span><br><span class="line">2. mv  docker-compose-Linux-x86_64  docker-compose</span><br><span class="line">3. sudo chmod +x docker-compose</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -417,6 +440,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/07/11/Linux/" rel="prev" title="Linux">
+                Linux <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -493,7 +520,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -515,7 +542,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -548,7 +575,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">安装软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81docker%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">1、docker离线安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">安装软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85yum"><span class="nav-number">1.1.</span> <span class="nav-text">1、安装yum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81docker%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">2、docker离线安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E4%B8%8B%E8%BD%BDdocker%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 下载docker离线安装包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E5%90%AF%E5%8A%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 启动</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E3%80%81%E5%AE%89%E8%A3%85docker-compose"><span class="nav-number">1.3.</span> <span class="nav-text">3 、安装docker-compose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E4%B8%8B%E8%BD%BDdocker-compose"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 下载docker-compose</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2  安装</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
